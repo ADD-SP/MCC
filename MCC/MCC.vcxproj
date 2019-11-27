@@ -132,6 +132,7 @@
     <ClInclude Include="Lexer.h" />
     <ClInclude Include="LLTable.h" />
     <ClInclude Include="LLTableItem.h" />
+    <ClInclude Include="macro.h" />
     <ClInclude Include="Number.h" />
     <ClInclude Include="Operator.h" />
     <ClInclude Include="Token.h" />

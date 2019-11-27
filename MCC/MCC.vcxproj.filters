@@ -57,6 +57,9 @@
     <ClInclude Include="Ast.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="macro.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Lexer.cpp">

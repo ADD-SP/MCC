@@ -1,5 +1,26 @@
 #include "Lexer.h"
 
+unordered_set<string> Lexer::_keywords;
+
+void Lexer::_iniKeyWords()
+{
+	if (_keywords.size() != 0)
+	{
+		_keywords.insert("if");
+		_keywords.insert("else");
+		_keywords.insert("while");
+		_keywords.insert("for");
+		_keywords.insert("return");
+		_keywords.insert("int");
+		_keywords.insert("float");
+		_keywords.insert("switch");
+		_keywords.insert("case");
+		_keywords.insert("break");
+		_keywords.insert("continue");
+		_keywords.insert("goto");
+	}
+}
+
 void Lexer::_handle(const string& filename)
 {
 	fstream fs(filename, ios::in);
@@ -20,6 +41,11 @@ void Lexer::_handle(const string& filename)
 			break;
 		}
 
+		if (_matchIdOrKeyWord(fs))
+		{
+			continue;
+		}
+
 		if (_matchOperator(fs))
 		{
 			continue;
@@ -29,10 +55,47 @@ void Lexer::_handle(const string& filename)
 		{
 			continue;
 		}
+
+		if (_matchOther(fs))
+		{
+			continue;
+		}
 	}
 
 	fs.close();
 	_tokens.push_back(new EndToken());
+}
+
+bool Lexer::_matchOther(fstream& fs)
+{
+	char c = fs.peek();
+	bool isFound = false;
+	string lexeme;
+	
+	switch (c)
+	{
+	case '(':
+	case ')':
+	case '{':
+	case '}':
+	case '[':
+	case ']':
+		fs.get(c);
+		lexeme.push_back(c);
+		_tokens.push_back(new Bracket(lexeme));
+		isFound = true;
+		break;
+	case ';':
+		fs.get(c);
+		lexeme.push_back(c);
+		_tokens.push_back(new Semicolon(lexeme));
+		isFound = true;
+		break;
+	default:
+		isFound = false;
+		break;
+	}
+	return isFound;
 }
 
 bool Lexer::_matchOperator(fstream& fs)
@@ -57,12 +120,35 @@ bool Lexer::_matchOperator(fstream& fs)
 		fs.get(c);
 		_tokens.push_back(new Operator(Operator::div));
 		break;
-	case '=':
+	case '<':
 		fs.get(c);
-		c = fs.peek();
 		if (fs.peek() == '=')
 		{
-			fs >> c;
+			fs.get(c);
+			_tokens.push_back(new Operator(Operator::lessEqual));
+		}
+		else
+		{
+			_tokens.push_back(new Operator(Operator::less));
+		}
+		break;
+	case '>':
+		fs.get(c);
+		if (fs.peek() == '=')
+		{
+			fs.get(c);
+			_tokens.push_back(new Operator(Operator::greateEqual));
+		}
+		else
+		{
+			_tokens.push_back(new Operator(Operator::greate));
+		}
+		break;
+	case '=':
+		fs.get(c);
+		if (fs.peek() == '=')
+		{
+			fs.get(c);
 			_tokens.push_back(new Operator(Operator::equal));
 		}
 		else
@@ -84,37 +170,69 @@ bool Lexer::_matchNumber(fstream& fs)
 	bool isInterget = true;
 	string lexeme;
 
-	while ((c >= '0' && c <= '9') || c == '.')
+	if (c >= '0' && c <= '9')
 	{
-		fs >> c;
-		if (c != '.')
+		do
 		{
-			lexeme.push_back(c);
+			fs.get(c);
+			if (c != '.')
+			{
+				lexeme.push_back(c);
+			}
+			else
+			{
+				isInterget = false;
+				lexeme.push_back('.');
+			}
+			c = fs.peek();
+		} while ((c >= '0' && c <= '9') || c == '.');
+
+		if (isInterget)
+		{
+			_tokens.push_back(new Interger(lexeme));
 		}
 		else
 		{
-			isInterget = false;
-			lexeme.push_back('.');
+			_tokens.push_back(new Decimal(lexeme));
 		}
-		c = fs.peek();
-	}
-
-	// fs.seekg(-1, ios::cur);
-
-	if (isInterget)
-	{
-		_tokens.push_back(new Interger(lexeme));
-	}
-	else
-	{
-		_tokens.push_back(new Decimal(lexeme));
 	}
 
 	return lexeme.size() == 0 ? false : true;
 }
 
+bool Lexer::_matchIdOrKeyWord(fstream& fs)
+{
+	char c = fs.peek();
+	string lexeme;
+	bool isIdOrKeyWord = false;
+
+	if ((c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z') || c == '_')
+	{
+		isIdOrKeyWord = true;
+
+		do
+		{
+			fs.get(c);
+			lexeme.push_back(c);
+			c = fs.peek();
+
+		} while ((c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z') || (c >= '0' && c <= '9'));
+
+		if (_keywords.find(lexeme) == _keywords.end())
+		{
+			_tokens.push_back(new Id(lexeme));
+		}
+		else
+		{
+			_tokens.push_back(new Type(lexeme));
+		}
+	}
+	return isIdOrKeyWord;
+}
+
 Lexer::Lexer(const char* filename)
 {
+	_iniKeyWords();
 	string str(filename);
 	_handle(str);
 	_index = -1;
@@ -122,6 +240,7 @@ Lexer::Lexer(const char* filename)
 
 Lexer::Lexer(const string& filename)
 {
+	_iniKeyWords();
 	_handle(filename);
 	_index = -1;
 }

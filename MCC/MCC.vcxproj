@@ -125,9 +125,11 @@
   <ItemGroup>
     <ClInclude Include="Ast.h" />
     <ClInclude Include="AstNode.h" />
+    <ClInclude Include="Bracket.h" />
     <ClInclude Include="Decimal.h" />
     <ClInclude Include="EndToken.h" />
     <ClInclude Include="GS.h" />
+    <ClInclude Include="Id.h" />
     <ClInclude Include="Interger.h" />
     <ClInclude Include="Lexer.h" />
     <ClInclude Include="LLTable.h" />
@@ -135,24 +137,30 @@
     <ClInclude Include="macro.h" />
     <ClInclude Include="Number.h" />
     <ClInclude Include="Operator.h" />
+    <ClInclude Include="Semicolon.h" />
     <ClInclude Include="Token.h" />
     <ClInclude Include="TokenSequence.h" />
     <ClInclude Include="token_type.h" />
+    <ClInclude Include="Type.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Ast.cpp" />
     <ClCompile Include="AstNode.cpp" />
+    <ClCompile Include="Bracket.cpp" />
     <ClCompile Include="Decimal.cpp" />
     <ClCompile Include="EndToken.cpp" />
     <ClCompile Include="GS.cpp" />
+    <ClCompile Include="Id.cpp" />
     <ClCompile Include="Interger.cpp" />
     <ClCompile Include="Lexer.cpp" />
     <ClCompile Include="LLTable.cpp" />
     <ClCompile Include="LLTableItem.cpp" />
     <ClCompile Include="Number.cpp" />
     <ClCompile Include="Operator.cpp" />
+    <ClCompile Include="Semicolon.cpp" />
     <ClCompile Include="Token.cpp" />
     <ClCompile Include="TokenSequence.cpp" />
+    <ClCompile Include="Type.cpp" />
     <ClCompile Include="源.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

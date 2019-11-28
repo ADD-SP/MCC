@@ -53,8 +53,13 @@ AstNode* parseE()
 	string value;
 	string var;
 	Token* token = lexer.peek();
+	string lexeme = token->lexeme;
 	string type = token->getType();
-	if (type == "Number" || type == "Decimal" || type == "Interger")
+	if (type == Number::typeName
+		|| type == Decimal::typeName
+		|| type == Interger::typeName
+		|| type == Id::typeName
+		|| (type == Bracket::typeName && lexeme == "("))
 	{
 		left = parseT();
 		right = parse_E(GET_VALUE(left, 0));
@@ -86,8 +91,13 @@ AstNode* parseT()
 	string value;
 	string var;
 	Token* token = lexer.peek();
+	string lexeme = token->lexeme;
 	string type = token->getType();
-	if (type == "Number" || type == "Decimal" || type == "Interger")
+	if (type == Number::typeName
+		|| type == Decimal::typeName
+		|| type == Interger::typeName
+		|| type == Id::typeName
+		|| (type == Bracket::typeName && lexeme == "("))
 	{
 		left = parseF();
 		right = parse_T(GET_VALUE(left, 0));
@@ -119,8 +129,9 @@ AstNode* parse_E(string number)
 	string value;
 	string var;
 	Token* token = lexer.peek();
+	string lexeme = token->lexeme;
 	string type = token->getType();
-	if (type == "Operator")
+	if (type == Operator::typeName)
 	{
 		if (token->lexeme == "+" || token->lexeme == "-")
 		{
@@ -146,7 +157,8 @@ AstNode* parse_E(string number)
 			return p;
 		}
 	}
-	else if (type != "EndToken")
+	else if (type != EndToken::typeName 
+		&& (type != Bracket::typeName && lexeme == ")"))
 	{
 		exit(-100);
 	}
@@ -162,8 +174,9 @@ AstNode* parse_T(string number)
 	string value;
 	string var;
 	Token* token = lexer.peek();
+	string lexeme = token->lexeme;
 	string type = token->getType();
-	if (type == "Operator")
+	if (type == Operator::typeName)
 	{
 		if (token->lexeme == "*" || token->lexeme == "/")
 		{
@@ -189,7 +202,8 @@ AstNode* parse_T(string number)
 			return p;
 		}
 	}
-	else if (type != "EndToken")
+	else if (type != EndToken::typeName
+		&& (type != Bracket::typeName && lexeme == ")"))
 	{
 		exit(-100);
 	}
@@ -199,16 +213,38 @@ AstNode* parse_T(string number)
 AstNode* parseF()
 {
 	AstNode* p = new AstNode();
+	AstNode* left = nullptr;
 	string var;
 	Token* token = lexer.peek();
+	string lexeme = token->lexeme;
 	string type = token->getType();
-	if (type == "Interger" || type == "Decimal")
+	if (type == Interger::typeName
+		|| type == Decimal::typeName
+		|| type == Number::typeName
+		|| type == Id::typeName)
 	{
-		var = getVar();
 		token = lexer.nextToken();
-		p->push_back(var);
 		p->push_back(token->lexeme);
-		gen(var + "=" + GET_VALUE(p, 1));
+	}
+	else if (type == Bracket::typeName && lexeme == "(")
+	{
+		token = lexer.nextToken();
+		left = parseE();
+		p->push_left(left);
+		p->push_back(GET_VALUE(left, 0));
+
+		token = lexer.peek();
+		type = token->getType();
+		lexeme = token->lexeme;
+
+		if (type == Bracket::typeName && lexeme == ")")
+		{
+			token = lexer.nextToken();
+		}
+		else
+		{
+			exit(-100);
+		}
 	}
 	else
 	{

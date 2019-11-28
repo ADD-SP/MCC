@@ -60,6 +60,18 @@
     <ClInclude Include="macro.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="Id.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Type.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Semicolon.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Bracket.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Lexer.cpp">
@@ -102,6 +114,18 @@
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="Ast.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="Id.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="Type.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="Semicolon.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="Bracket.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>

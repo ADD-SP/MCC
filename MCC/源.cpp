@@ -23,9 +23,9 @@ AstNode* parseE();
 
 AstNode* parseT();
 
-AstNode* parse_E(Number* number);
+AstNode* parse_E(string number);
 
-AstNode* parse_T(Number* number);
+AstNode* parse_T(string number);
 
 AstNode* parseF();
 
@@ -40,7 +40,7 @@ int main()
 
 	Ast ast(parseE());
 
-	cout << GET_VALUE(ast.root, 0) << endl;
+	// cout << GET_VALUE(ast.root, 0) << endl;
 
 	return 0;
 }
@@ -57,15 +57,13 @@ AstNode* parseE()
 	if (type == "Number" || type == "Decimal" || type == "Interger")
 	{
 		left = parseT();
-		right = parse_E(CAST(token, Number*));
+		right = parse_E(GET_VALUE(left, 0));
 		p->push_right(left);
 		p->push_right(right);
-		// var = getVar();
-		// p->push_back(var);
 
 		if (right)
 		{
-			p->push_back(GET_VALUE(left, 0) + GET_VALUE(right, 0));
+			p->push_back(GET_VALUE(right, 0));
 		}
 		else
 		{
@@ -92,15 +90,13 @@ AstNode* parseT()
 	if (type == "Number" || type == "Decimal" || type == "Interger")
 	{
 		left = parseF();
-		right = parse_T(CAST(token, Number*));
+		right = parse_T(GET_VALUE(left, 0));
 		p->push_right(left);
 		p->push_right(right);
-		// var = getVar();
-		// p->push_back(var);
-
+		
 		if (right)
 		{
-			p->push_back(GET_VALUE(left, 0) + GET_VALUE(right, 0));
+			p->push_back(GET_VALUE(right, 0));
 		}
 		else
 		{
@@ -115,7 +111,7 @@ AstNode* parseT()
 	return p;
 }
 
-AstNode* parse_E(Number* number)
+AstNode* parse_E(string number)
 {
 	AstNode* p = new AstNode();
 	AstNode* left = nullptr;
@@ -128,30 +124,24 @@ AstNode* parse_E(Number* number)
 	{
 		if (token->lexeme == "+" || token->lexeme == "-")
 		{
+			var = getVar();
 			token = lexer.nextToken();
 			left = parseT();
-			right = parse_E(CAST(token, Number*));
+
+			gen(var + "=" + number + token->lexeme + GET_VALUE(left, 0));
+
+			right = parse_E(var);
 			p->push_right(left);
 			p->push_right(right);
-			
-			if (token->lexeme == "+")
-			{
-				value += "+";
-			}
-			else
-			{
-				value += "-";
-			}
-
-			value += GET_VALUE(left, 0);
 
 			if (right)
 			{
-				value += GET_VALUE(right, 0);
+				p->push_back(GET_VALUE(right, 0));
 			}
-
-			p->push_back(value);
-
+			else
+			{
+				p->push_back(var);
+			}
 
 			return p;
 		}
@@ -164,7 +154,7 @@ AstNode* parse_E(Number* number)
 	return nullptr;
 }
 
-AstNode* parse_T(Number* number)
+AstNode* parse_T(string number)
 {
 	AstNode* p = new AstNode();
 	AstNode* left = nullptr;
@@ -177,29 +167,24 @@ AstNode* parse_T(Number* number)
 	{
 		if (token->lexeme == "*" || token->lexeme == "/")
 		{
+			var = getVar();
 			token = lexer.nextToken();
 			left = parseF();
-			right = parse_T(CAST(token, Number*));
+
+			gen(var + "=" + number + token->lexeme + GET_VALUE(left, 0));
+
+			right = parse_T(var);
 			p->push_right(left);
 			p->push_right(right);
 
-			if (token->lexeme == "*")
+			if (right)
 			{
-				value += "*";
+				p->push_back(GET_VALUE(right, 0));
 			}
 			else
 			{
-				value += "/";
+				p->push_back(var);
 			}
-
-			value += GET_VALUE(left, 0);
-
-			if (right)
-			{
-				value += GET_VALUE(right, 0);
-			}
-
-			p->push_back(value);
 
 			return p;
 		}
@@ -214,12 +199,16 @@ AstNode* parse_T(Number* number)
 AstNode* parseF()
 {
 	AstNode* p = new AstNode();
+	string var;
 	Token* token = lexer.peek();
 	string type = token->getType();
 	if (type == "Interger" || type == "Decimal")
 	{
+		var = getVar();
 		token = lexer.nextToken();
+		p->push_back(var);
 		p->push_back(token->lexeme);
+		gen(var + "=" + GET_VALUE(p, 1));
 	}
 	else
 	{

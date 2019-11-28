@@ -12,6 +12,10 @@ const int Operator::less = 6;
 const int Operator::greate = 7;
 const int Operator::lessEqual = 8;
 const int Operator::greateEqual = 9;
+const int Operator::logicalAnd = 10;
+const int Operator::logicalOr = 11;
+const int Operator::bitAnd = 12;
+const int Operator::bitOr = 13;
 
 Operator::Operator(OperatorType operatorType)
 	:Token("")
@@ -30,6 +34,9 @@ Operator::Operator(OperatorType operatorType)
 	case div:
 		lexeme = "/";
 		break;
+	case equal:
+		lexeme = "==";
+		break;
 	case less:
 		lexeme = "<";
 		break;
@@ -41,6 +48,18 @@ Operator::Operator(OperatorType operatorType)
 		break;
 	case greateEqual:
 		lexeme = ">=";
+		break;
+	case logicalAnd:
+		lexeme = "&&";
+		break;
+	case logicalOr:
+		lexeme = "||";
+		break;
+	case bitAnd:
+		lexeme = "&";
+		break;
+	case bitOr:
+		lexeme = "|";
 		break;
 
 	}

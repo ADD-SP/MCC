@@ -4,7 +4,7 @@ unordered_set<string> Lexer::_keywords;
 
 void Lexer::_iniKeyWords()
 {
-	if (_keywords.size() != 0)
+	if (_keywords.size() == 0)
 	{
 		_keywords.insert("if");
 		_keywords.insert("else");
@@ -18,6 +18,8 @@ void Lexer::_iniKeyWords()
 		_keywords.insert("break");
 		_keywords.insert("continue");
 		_keywords.insert("goto");
+		_keywords.insert("true");
+		_keywords.insert("false");
 	}
 }
 
@@ -120,6 +122,31 @@ bool Lexer::_matchOperator(fstream& fs)
 		fs.get(c);
 		_tokens.push_back(new Operator(Operator::div));
 		break;
+	case '&':
+		fs.get(c);
+		if (fs.peek() == '&')
+		{
+			fs.get(c);
+			_tokens.push_back(new Operator(Operator::logicalAnd));
+		}
+		else
+		{
+			_tokens.push_back(new Operator(Operator::bitAnd));
+		}
+		break;
+	case '|':
+		fs.get(c);
+		if (fs.peek() == '|')
+		{
+			fs.get(c);
+			_tokens.push_back(new Operator(Operator::logicalOr));
+		}
+		else
+		{
+			_tokens.push_back(new Operator(Operator::bitOr));
+		}
+		break;
+
 	case '<':
 		fs.get(c);
 		if (fs.peek() == '=')
@@ -224,7 +251,7 @@ bool Lexer::_matchIdOrKeyWord(fstream& fs)
 		}
 		else
 		{
-			_tokens.push_back(new Type(lexeme));
+			_tokens.push_back(new Keyword(lexeme));
 		}
 	}
 	return isIdOrKeyWord;

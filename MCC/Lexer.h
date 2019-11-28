@@ -23,6 +23,7 @@ typedef long long Index;
 #include "Id.h"
 #include "Bracket.h"
 #include "Semicolon.h"
+#include "Keyword.h"
 
 using std::fstream;
 using std::vector;

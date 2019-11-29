@@ -123,11 +123,15 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="all_token.h" />
     <ClInclude Include="Ast.h" />
     <ClInclude Include="AstNode.h" />
     <ClInclude Include="Bracket.h" />
+    <ClInclude Include="Comma.h" />
     <ClInclude Include="Decimal.h" />
     <ClInclude Include="EndToken.h" />
+    <ClInclude Include="Environment.h" />
+    <ClInclude Include="global.h" />
     <ClInclude Include="GS.h" />
     <ClInclude Include="Id.h" />
     <ClInclude Include="Interger.h" />
@@ -140,17 +144,21 @@
     <ClInclude Include="Operator.h" />
     <ClInclude Include="Parser.h" />
     <ClInclude Include="Semicolon.h" />
+    <ClInclude Include="SymbolTable.h" />
+    <ClInclude Include="SymbolTableItem.h" />
     <ClInclude Include="Token.h" />
     <ClInclude Include="TokenSequence.h" />
-    <ClInclude Include="token_type.h" />
     <ClInclude Include="Type.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Ast.cpp" />
     <ClCompile Include="AstNode.cpp" />
     <ClCompile Include="Bracket.cpp" />
+    <ClCompile Include="Comma.cpp" />
     <ClCompile Include="Decimal.cpp" />
     <ClCompile Include="EndToken.cpp" />
+    <ClCompile Include="Environment.cpp" />
+    <ClCompile Include="global.cpp" />
     <ClCompile Include="GS.cpp" />
     <ClCompile Include="Id.cpp" />
     <ClCompile Include="Interger.cpp" />
@@ -162,6 +170,8 @@
     <ClCompile Include="Operator.cpp" />
     <ClCompile Include="Parser.cpp" />
     <ClCompile Include="Semicolon.cpp" />
+    <ClCompile Include="SymbolTable.cpp" />
+    <ClCompile Include="SymbolTableItem.cpp" />
     <ClCompile Include="Token.cpp" />
     <ClCompile Include="TokenSequence.cpp" />
     <ClCompile Include="Type.cpp" />

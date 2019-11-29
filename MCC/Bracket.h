@@ -9,10 +9,6 @@ public:
 	Bracket(const string& lexeme);
 	Bracket(const Bracket& bracket);
 	virtual string getType() const;
-	virtual size_t getHashCode() const;
-	virtual bool isEqual(const Bracket& bracket) const;
-	virtual bool operator==(const Bracket& bracket) const;
-	virtual bool operator!=(const Bracket bracket) const;
 };
 
 

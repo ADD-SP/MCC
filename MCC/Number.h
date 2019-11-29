@@ -15,8 +15,6 @@ public:
 	Number(const string& lexeme);
 	Number(const Number& number);
 	virtual string getType() const;
-	virtual size_t getHashCode() const;
-	virtual bool operator==(const Number& number) const;
 };
 
 namespace std

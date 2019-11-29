@@ -11,10 +11,6 @@ public:
 	Semicolon(const string& lexeme);
 	Semicolon(const Semicolon& semicolon);
 	virtual string getType() const;
-	virtual size_t getHashCode() const;
-	virtual bool isEqual(const Semicolon& semicolon) const;
-	virtual bool operator==(const Semicolon& semicolon) const;
-	virtual bool operator!=(const Semicolon semicolon) const;
 };
 
 namespace std

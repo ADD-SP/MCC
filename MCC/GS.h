@@ -10,9 +10,6 @@ public:
 	GS(const char* lexeme);
 	GS(const string& lexeme);
 	virtual string getType() const;
-	virtual size_t getHashCode() const;
-	virtual bool isEqual(const GS& gs) const;
-	virtual bool operator==(const GS& gs) const;
 };
 
 namespace std

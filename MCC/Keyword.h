@@ -11,9 +11,6 @@ public:
 	Keyword(const string& lexeme);
 	Keyword(const Keyword& keyword);
 	virtual string getType() const;
-	virtual size_t getHashCode() const;
-	virtual bool isEqual(const Keyword& keyword) const;
-	virtual bool operator==(const Keyword& keyword) const;
 };
 
 namespace std

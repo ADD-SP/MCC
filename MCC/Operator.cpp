@@ -39,6 +39,9 @@ Operator::Operator(OperatorType operatorType)
 	case equal:
 		lexeme = "==";
 		break;
+	case assign:
+		lexeme = "=";
+		break;
 	case notEqual:
 		lexeme = "!=";
 		break;
@@ -82,22 +85,5 @@ Operator::Operator(const Operator& op)
 
 string Operator::getType() const
 {
-	return typeName;
-}
-
-size_t Operator::getHashCode() const
-{
-	return std::hash<string>()(lexeme);
-}
-
-bool Operator::operator==(const Operator& op) const
-{
-	if (this->getType() == op.getType())
-	{
-		return this->lexeme == op.lexeme;
-	}
-	else
-	{
-		return false;
-	}
+	return this->typeName;
 }

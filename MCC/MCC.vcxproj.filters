@@ -13,42 +13,21 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="头文件\Tokens">
+      <UniqueIdentifier>{ed26ade4-3aa0-48ad-b13e-117b95433bf2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="源文件\Tokens">
+      <UniqueIdentifier>{28daceaf-b6cd-48b9-9ce7-1f9e36d0fece}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="头文件\Unused">
+      <UniqueIdentifier>{bea97d43-c52f-4752-8293-999828b59870}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="源文件\Unused">
+      <UniqueIdentifier>{b9717f64-1ec2-4865-995c-d8c8e39c7437}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="token_type.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
     <ClInclude Include="Lexer.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="Token.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="Number.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="Interger.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="Operator.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="Decimal.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="GS.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="LLTableItem.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="LLTable.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="TokenSequence.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="EndToken.h">
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="AstNode.h">
@@ -60,22 +39,70 @@
     <ClInclude Include="macro.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="Id.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="Type.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="Semicolon.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="Bracket.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
     <ClInclude Include="Parser.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="SymbolTableItem.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="all_token.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="global.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="SymbolTable.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Environment.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Bracket.h">
+      <Filter>头文件\Tokens</Filter>
+    </ClInclude>
+    <ClInclude Include="Decimal.h">
+      <Filter>头文件\Tokens</Filter>
+    </ClInclude>
+    <ClInclude Include="EndToken.h">
+      <Filter>头文件\Tokens</Filter>
+    </ClInclude>
+    <ClInclude Include="GS.h">
+      <Filter>头文件\Tokens</Filter>
+    </ClInclude>
+    <ClInclude Include="Id.h">
+      <Filter>头文件\Tokens</Filter>
+    </ClInclude>
+    <ClInclude Include="Interger.h">
+      <Filter>头文件\Tokens</Filter>
+    </ClInclude>
     <ClInclude Include="Keyword.h">
+      <Filter>头文件\Tokens</Filter>
+    </ClInclude>
+    <ClInclude Include="Number.h">
+      <Filter>头文件\Tokens</Filter>
+    </ClInclude>
+    <ClInclude Include="Operator.h">
+      <Filter>头文件\Tokens</Filter>
+    </ClInclude>
+    <ClInclude Include="Semicolon.h">
+      <Filter>头文件\Tokens</Filter>
+    </ClInclude>
+    <ClInclude Include="Token.h">
+      <Filter>头文件\Tokens</Filter>
+    </ClInclude>
+    <ClInclude Include="Type.h">
+      <Filter>头文件\Tokens</Filter>
+    </ClInclude>
+    <ClInclude Include="TokenSequence.h">
+      <Filter>头文件\Unused</Filter>
+    </ClInclude>
+    <ClInclude Include="LLTableItem.h">
+      <Filter>头文件\Unused</Filter>
+    </ClInclude>
+    <ClInclude Include="LLTable.h">
+      <Filter>头文件\Unused</Filter>
+    </ClInclude>
+    <ClInclude Include="Comma.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>
@@ -86,34 +113,7 @@
     <ClCompile Include="Token.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="Number.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="Interger.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="Operator.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="Decimal.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
     <ClCompile Include="源.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="GS.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="LLTableItem.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="LLTable.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="TokenSequence.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="EndToken.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="AstNode.cpp">
@@ -122,23 +122,65 @@
     <ClCompile Include="Ast.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="Id.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="Type.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="Semicolon.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="Bracket.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
     <ClCompile Include="Parser.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="Keyword.cpp">
+    <ClCompile Include="SymbolTableItem.cpp">
       <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="global.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="SymbolTable.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="Environment.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="Bracket.cpp">
+      <Filter>源文件\Tokens</Filter>
+    </ClCompile>
+    <ClCompile Include="Decimal.cpp">
+      <Filter>源文件\Tokens</Filter>
+    </ClCompile>
+    <ClCompile Include="EndToken.cpp">
+      <Filter>源文件\Tokens</Filter>
+    </ClCompile>
+    <ClCompile Include="GS.cpp">
+      <Filter>源文件\Tokens</Filter>
+    </ClCompile>
+    <ClCompile Include="Id.cpp">
+      <Filter>源文件\Tokens</Filter>
+    </ClCompile>
+    <ClCompile Include="Interger.cpp">
+      <Filter>源文件\Tokens</Filter>
+    </ClCompile>
+    <ClCompile Include="Keyword.cpp">
+      <Filter>源文件\Tokens</Filter>
+    </ClCompile>
+    <ClCompile Include="Number.cpp">
+      <Filter>源文件\Tokens</Filter>
+    </ClCompile>
+    <ClCompile Include="Operator.cpp">
+      <Filter>源文件\Tokens</Filter>
+    </ClCompile>
+    <ClCompile Include="Semicolon.cpp">
+      <Filter>源文件\Tokens</Filter>
+    </ClCompile>
+    <ClCompile Include="Type.cpp">
+      <Filter>源文件\Tokens</Filter>
+    </ClCompile>
+    <ClCompile Include="TokenSequence.cpp">
+      <Filter>源文件\Unused</Filter>
+    </ClCompile>
+    <ClCompile Include="LLTableItem.cpp">
+      <Filter>源文件\Unused</Filter>
+    </ClCompile>
+    <ClCompile Include="LLTable.cpp">
+      <Filter>源文件\Unused</Filter>
+    </ClCompile>
+    <ClCompile Include="Comma.cpp">
+      <Filter>源文件\Tokens</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

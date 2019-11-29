@@ -19,7 +19,7 @@ Token::Token(const Token& token)
 
 string Token::getType() const
 {
-	return typeName;
+	return this->typeName;
 }
 
 size_t Token::getHashCode() const

@@ -19,34 +19,6 @@ Interger::Interger(const Interger& interger)
 
 string Interger::getType() const
 {
-	return typeName;
+	return this->typeName;
 }
 
-size_t Interger::getHashCode() const
-{
-	return std::hash<string>()(lexeme);
-}
-
-bool Interger::isEqual(const Interger& interger) const
-{
-	if (this->getType() == interger.getType())
-	{
-		return this->lexeme == interger.lexeme;
-	}
-	else
-	{
-		return false;
-	}
-}
-
-bool Interger::operator==(const Interger& interger) const
-{
-	if (this->getType() == interger.getType())
-	{
-		return this->lexeme == interger.lexeme;
-	}
-	else
-	{
-		return false;
-	}
-}

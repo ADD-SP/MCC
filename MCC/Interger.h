@@ -11,9 +11,6 @@ public:
 	Interger(const string& lexeme);
 	Interger(const Interger& interger);
 	virtual string getType() const;
-	virtual size_t getHashCode() const;
-	virtual bool isEqual(const Interger& interger) const;
-	virtual bool operator==(const Interger& interger) const;
 };
 
 namespace std

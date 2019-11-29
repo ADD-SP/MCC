@@ -1,18 +1,18 @@
 #include "Lexer.h"
 
 unordered_set<string> Lexer::_keywords;
+unordered_set<string> Lexer::_types;
 
-void Lexer::_iniKeyWords()
+void Lexer::_iniKeyWordsAndTypes()
 {
 	if (_keywords.size() == 0)
 	{
+		_keywords.insert("const");
 		_keywords.insert("if");
 		_keywords.insert("else");
 		_keywords.insert("while");
 		_keywords.insert("for");
 		_keywords.insert("return");
-		_keywords.insert("int");
-		_keywords.insert("float");
 		_keywords.insert("switch");
 		_keywords.insert("case");
 		_keywords.insert("break");
@@ -20,6 +20,11 @@ void Lexer::_iniKeyWords()
 		_keywords.insert("goto");
 		_keywords.insert("true");
 		_keywords.insert("false");
+
+		_types.insert("int");
+		_types.insert("float");
+		_types.insert("bool");
+		_types.insert("void");
 	}
 }
 
@@ -78,10 +83,22 @@ bool Lexer::_matchOther(fstream& fs)
 	{
 	case '(':
 	case ')':
-	case '{':
-	case '}':
 	case '[':
 	case ']':
+		fs.get(c);
+		lexeme.push_back(c);
+		_tokens.push_back(new Bracket(lexeme));
+		isFound = true;
+		break;
+	case '{':
+		environment.createNewEnvironment();
+		fs.get(c);
+		lexeme.push_back(c);
+		_tokens.push_back(new Bracket(lexeme));
+		isFound = true;
+		break;
+	case '}':
+		environment.exitCurrentEnvironment();
 		fs.get(c);
 		lexeme.push_back(c);
 		_tokens.push_back(new Bracket(lexeme));
@@ -258,13 +275,18 @@ bool Lexer::_matchIdOrKeyWord(fstream& fs)
 
 		} while ((c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z') || (c >= '0' && c <= '9'));
 
-		if (_keywords.find(lexeme) == _keywords.end())
+		if (_keywords.find(lexeme) != _keywords.end())
 		{
-			_tokens.push_back(new Id(lexeme));
+			_tokens.push_back(new Keyword(lexeme));
+		}
+		else if (_types.find(lexeme) != _types.end())
+		{
+			_tokens.push_back(new Type(lexeme));
 		}
 		else
 		{
-			_tokens.push_back(new Keyword(lexeme));
+			environment.insert(lexeme, SymbolTableItem(lexeme, g_getVar(), "", 0));
+			_tokens.push_back(new Id(lexeme));
 		}
 	}
 	return isIdOrKeyWord;
@@ -272,7 +294,7 @@ bool Lexer::_matchIdOrKeyWord(fstream& fs)
 
 Lexer::Lexer(const char* filename)
 {
-	_iniKeyWords();
+	_iniKeyWordsAndTypes();
 	string str(filename);
 	_handle(str);
 	_index = -1;
@@ -280,18 +302,18 @@ Lexer::Lexer(const char* filename)
 
 Lexer::Lexer(const string& filename)
 {
-	_iniKeyWords();
+	_iniKeyWordsAndTypes();
 	_handle(filename);
 	_index = -1;
 }
 
 Token* Lexer::nextToken()
 {
-	if (_index + 1 == _tokens.size() - 1)
+	if (_index + 1 == (Index)_tokens.size() - 1)
 	{
 		return _tokens[_index + 1];
 	}
-	else if (_index + 1 < _tokens.size())
+	else if (_index + 1 < (Index)_tokens.size())
 	{
 		return _tokens[++_index];
 	}
@@ -303,7 +325,7 @@ Token* Lexer::nextToken()
 
 Token* Lexer::peek()
 {
-	if (_index + 1 < _tokens.size())
+	if (_index + 1 < (Index)_tokens.size())
 	{
 		return _tokens[_index + 1];
 	}
@@ -315,7 +337,9 @@ Token* Lexer::peek()
 
 void Lexer::seek(Index offset)
 {
-	if (_index + offset >= -1 && _index + offset < _tokens.size())
+	bool f1 = _index + offset >= -1;
+	bool f2 = (_index + offset) < (Index)_tokens.size();
+	if (f1 && f2)
 	{
 		_index += offset;
 	}

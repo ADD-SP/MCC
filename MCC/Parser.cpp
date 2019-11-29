@@ -1,17 +1,266 @@
 #include "Parser.h"
-#include "Parser.h"
-
-string Parser::_getVar()
-{
-	static char a = 'a';
-	string ret;
-	ret.push_back(a++);
-	return ret;
-}
 
 void Parser::_gen(string str)
 {
 	cout << str << endl;
+}
+
+AstNode* Parser::_parseSE()
+{
+	AstNode* p = new AstNode();
+	AstNode* first = nullptr;
+	AstNode* second = nullptr;
+	AstNode* third = nullptr;
+	AstNode* fourth = nullptr;
+	AstNode* fifth = nullptr;
+	AstNode* sixth = nullptr;
+	Token* token = _lexer.peek();
+
+	if (token->getType() == Id::typeName
+		|| token->getType() == Number::typeName
+		|| token->getType() == Interger::typeName
+		|| token->getType() ==  Decimal::typeName
+		|| (token->getType() == Keyword::typeName && token->lexeme == "true")
+		|| (token->getType() == Keyword::typeName && token->lexeme == "false")
+		|| (token->getType() == Bracket::typeName && token->lexeme == "("))
+	{
+		first = _parseBE();
+		second = _parse_SE();
+	}
+	else if (token->getType() == Keyword::typeName && token->lexeme == "if")
+	{
+		token = _lexer.nextToken();
+		token = _lexer.peek();
+		if (token->getType() == Bracket::typeName && token->lexeme == "(")
+		{
+			token = _lexer.nextToken();
+			first = _parseBE();
+			token = _lexer.peek();
+			if (token->getType() == Bracket::typeName && token->lexeme == ")")
+			{
+				token = _lexer.nextToken();
+				token = _lexer.peek();
+				if (token->getType() == Bracket::typeName && token->lexeme == "{")
+				{
+					token = _lexer.nextToken();
+					second = _parseSE();
+					token = _lexer.peek();
+					if (token->getType() == Bracket::typeName && token->lexeme == "}")
+					{
+						token = _lexer.nextToken();
+					}
+					else
+					{
+						exit(-100);
+					}
+				}
+				else
+				{
+					exit(-100);
+				}
+			}
+			else
+			{
+				exit(-100);
+			}
+		}
+		else
+		{
+			exit(-100);
+		}
+	}
+	else if (NOT((token->getType() == EndToken::typeName)
+		|| (token->getType() == Bracket::typeName && token->lexeme == "}")))
+	{
+		exit(-100);
+	}
+	return nullptr;
+}
+
+AstNode* Parser::_parseSEIF()
+{
+	AstNode* p = new AstNode();
+	AstNode* first = nullptr;
+	AstNode* second = nullptr;
+	AstNode* third = nullptr;
+	AstNode* fourth = nullptr;
+	AstNode* fifth = nullptr;
+	AstNode* sixth = nullptr;
+	Token* token = _lexer.peek();
+
+	if (token->getType() == Keyword::typeName && token->lexeme == "else")
+	{
+		token = _lexer.nextToken();
+		token = _lexer.peek();
+		if (token->getType() == Bracket::typeName && token->lexeme == "{")
+		{
+			token = _lexer.nextToken();
+			first = _parseSE();
+			token = _lexer.peek();
+			if (token->getType() == Bracket::typeName && token->lexeme == "}")
+			{
+				token = _lexer.nextToken();
+			}
+			else
+			{
+				exit(-100);
+			}
+		}
+		else
+		{
+			exit(-100);
+		}
+	}
+	else if (NOT(token->getType() == EndToken::typeName
+		||(token->getType() == Bracket::typeName && token->lexeme == "}")))
+	{
+		exit(-100);
+	}
+
+	return nullptr;
+}
+
+AstNode* Parser::_parse_SE()
+{
+	AstNode* p = new AstNode();
+	AstNode* first = nullptr;
+	AstNode* second = nullptr;
+	AstNode* third = nullptr;
+	AstNode* fourth = nullptr;
+	AstNode* fifth = nullptr;
+	AstNode* sixth = nullptr;
+	Token* token = _lexer.peek();
+
+	if (token->getType() == Operator::typeName && token->lexeme == "=")
+	{
+		token = _lexer.nextToken();
+		first = _parseBE();
+		token = _lexer.peek();
+		if (token->getType() == Semicolon::typeName)
+		{
+			token = _lexer.nextToken();
+		}
+		else
+		{
+			exit(-100);
+		}
+	}
+	else if (token->getType() == Bracket::typeName && token->lexeme == "(")
+	{
+		token = _lexer.nextToken();
+		first = _parseARGL();
+		token = _lexer.peek();
+		if (token->getType() == Bracket::typeName && token->lexeme == ")")
+		{
+			token = _lexer.nextToken();
+			token = _lexer.peek();
+			if (token->getType() == Semicolon::typeName)
+			{
+				token = _lexer.nextToken();
+			}
+			else
+			{
+				exit(-100);
+			}
+		}
+		else
+		{
+			exit(-100);
+		}
+	}
+	else if (token->getType() == Semicolon::typeName)
+	{
+		token = _lexer.nextToken();
+	}
+	else
+	{
+		exit(-100);
+	}
+
+	return nullptr;
+}
+
+AstNode* Parser::_parseARGL()
+{
+	AstNode* p = new AstNode();
+	AstNode* first = nullptr;
+	AstNode* second = nullptr;
+	AstNode* third = nullptr;
+	AstNode* fourth = nullptr;
+	AstNode* fifth = nullptr;
+	AstNode* sixth = nullptr;
+	Token* token = _lexer.peek();
+
+	if (token->getType() == Id::typeName
+		|| token->getType() == Number::typeName
+		|| token->getType() == Interger::typeName
+		|| token->getType() == Decimal::typeName
+		|| (token->getType() == Keyword::typeName && token->lexeme == "true")
+		|| (token->getType() == Keyword::typeName && token->lexeme == "false")
+		|| (token->getType() == Bracket::typeName && token->lexeme == "("))
+	{
+		token = _lexer.nextToken();
+		first = _parseBE();
+		second = _parse_ARGL();
+	}
+	else
+	{
+		exit(-100);
+	}
+
+	return nullptr;
+}
+
+AstNode* Parser::_parse_ARGL()
+{
+	AstNode* p = new AstNode();
+	AstNode* first = nullptr;
+	AstNode* second = nullptr;
+	AstNode* third = nullptr;
+	AstNode* fourth = nullptr;
+	AstNode* fifth = nullptr;
+	AstNode* sixth = nullptr;
+	Token* token = _lexer.peek();
+
+	if (token->getType() == Comma::typeName)
+	{
+		token = _lexer.nextToken();
+		first = _parse_ARGL();
+	}
+	else if (token->getType() == Id::typeName
+		|| token->getType() == Number::typeName
+		|| token->getType() == Interger::typeName
+		|| token->getType() == Decimal::typeName
+		|| (token->getType() == Keyword::typeName && token->lexeme == "true")
+		|| (token->getType() == Keyword::typeName && token->lexeme == "false")
+		|| (token->getType() == Bracket::typeName && token->lexeme == "("))
+	{
+		token = _lexer.nextToken();
+		first = _parseBE();
+		second = _parse_ARGL();
+	}
+	else if (token->getType() == Bracket::typeName && token->lexeme == "(")
+	{
+		token = _lexer.nextToken();
+		first = _parseARGL();
+		token = _lexer.peek();
+		if (token->getType() == Bracket::typeName && token->lexeme == ")")
+		{
+			token = _lexer.nextToken();
+			second = _parse_ARGL();
+		}
+		else
+		{
+			exit(-100);
+		}
+	}
+	else if (NOT((token->getType() == Bracket::typeName && token->lexeme == ")")
+		|| token->getType() == EndToken::typeName))
+	{
+		exit(-100);
+	}
+
+	return nullptr;
 }
 
 AstNode* Parser::_parseBE()
@@ -70,7 +319,7 @@ AstNode* Parser::_parse_BE(string lexeme)
 		|| (type == Operator::typeName && token->lexeme == ">="))
 	{
 		token = _lexer.nextToken();
-		var = _getVar();
+		var = g_getVar();
 		left = _parseBF();
 		p->push_right(left);
 
@@ -90,7 +339,7 @@ AstNode* Parser::_parse_BE(string lexeme)
 
 		return p;
 	}
-	else if (!((type == Operator::typeName && token->lexeme == ")") || type == EndToken::typeName))
+	else if (!((type == Bracket::typeName && token->lexeme == ")") || type == EndToken::typeName || type == Semicolon::typeName))
 	{
 		exit(-100);
 	}
@@ -241,7 +490,7 @@ AstNode* Parser::_parse_E(string number)
 	{
 		if (token->lexeme == "+" || token->lexeme == "-")
 		{
-			var = _getVar();
+			var = g_getVar();
 			token = _lexer.nextToken();
 			left = _parseT();
 
@@ -264,7 +513,8 @@ AstNode* Parser::_parse_E(string number)
 		}
 	}
 	else if (type != EndToken::typeName
-		&& (type != Bracket::typeName && lexeme == ")"))
+		&& (type != Bracket::typeName && lexeme == ")")
+		&& type != Semicolon::typeName)
 	{
 		exit(-100);
 	}
@@ -286,7 +536,7 @@ AstNode* Parser::_parse_T(string number)
 	{
 		if (token->lexeme == "*" || token->lexeme == "/")
 		{
-			var = _getVar();
+			var = g_getVar();
 			token = _lexer.nextToken();
 			left = _parseF();
 
@@ -309,7 +559,8 @@ AstNode* Parser::_parse_T(string number)
 		}
 	}
 	else if (type != EndToken::typeName
-		&& (type != Bracket::typeName && lexeme == ")"))
+		&& (type != Bracket::typeName && lexeme == ")")
+		&& type != Semicolon::typeName)
 	{
 		exit(-100);
 	}
@@ -367,5 +618,5 @@ Parser::Parser(Lexer& lexer)
 
 void Parser::parse()
 {
-	_parseBE();
+	_parseSE();
 }

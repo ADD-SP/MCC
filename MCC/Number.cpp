@@ -19,22 +19,5 @@ Number::Number(const Number& number)
 
 string Number::getType() const
 {
-	return typeName;
-}
-
-size_t Number::getHashCode() const
-{
-	return std::hash<string>()(lexeme);
-}
-
-bool Number::operator==(const Number& number) const
-{
-	if (this->getType() == number.getType())
-	{
-		return this->lexeme == number.lexeme;
-	}
-	else
-	{
-		return false;
-	}
+	return this->typeName;
 }

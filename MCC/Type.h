@@ -11,10 +11,6 @@ public:
 	Type(const string& lexeme);
 	Type(const Type& id);
 	virtual string getType() const;
-	virtual size_t getHashCode() const;
-	virtual bool isEqual(const Type& type) const;
-	virtual bool operator==(const Type& type) const;
-	virtual bool operator!=(const Type type) const;
 };
 
 namespace std

@@ -14,8 +14,6 @@ public:
 	Operator(OperatorType operatorType);
 	Operator(const Operator& op);
 	virtual string getType() const;
-	virtual size_t getHashCode() const;
-	virtual bool operator==(const Operator& op) const;
 };
 
 namespace std

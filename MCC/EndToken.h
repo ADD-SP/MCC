@@ -10,9 +10,6 @@ public:
 	EndToken();
 	EndToken(const EndToken& endToken);
 	virtual string getType() const;
-	virtual size_t getHashCode() const;
-	virtual bool isEqual(const EndToken& endToken) const;
-	virtual bool operator==(const EndToken& endToken) const;
 };
 
 namespace std

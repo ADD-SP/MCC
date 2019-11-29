@@ -21,31 +21,3 @@ string Id::getType() const
 {
 	return this->typeName;
 }
-
-size_t Id::getHashCode() const
-{
-	return std::hash<string>()(this->lexeme);
-}
-
-bool Id::isEqual(const Id& id) const
-{
-	if (id.getType() == this->getType())
-	{
-		return this->lexeme == id.lexeme;
-	}
-	return false;
-}
-
-bool Id::operator==(const Id& id) const
-{
-	if (id.getType() == this->getType())
-	{
-		return this->lexeme == id.lexeme;
-	}
-	return false;
-}
-
-bool Id::operator!=(const Id& id) const
-{
-	return !(*this == id);
-}

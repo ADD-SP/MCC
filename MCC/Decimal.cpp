@@ -19,30 +19,5 @@ Decimal::Decimal(const Decimal& decimal)
 
 string Decimal::getType() const
 {
-	return typeName;
-}
-
-size_t Decimal::getHashCode() const
-{
-	return std::hash<string>()(lexeme);
-}
-
-bool Decimal::isEqual(const Decimal& decimal) const
-{
-	if (decimal.getType() == this->getType())
-	{
-		return this->lexeme == decimal.lexeme;
-	}
-
-	return false;
-}
-
-bool Decimal::operator==(const Decimal& decimal) const
-{
-	if (decimal.getType() == this->getType())
-	{
-		return this->lexeme == decimal.lexeme;
-	}
-
-	return false;
+	return this->typeName;
 }

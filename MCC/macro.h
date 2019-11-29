@@ -4,6 +4,7 @@
 #define CAST(var, type) (dynamic_cast<type>(var))
 #define GET_VALUE(var, index) ((*var)[index])
 #define GET_LEAF(var, index) ((*var)(index))
+#define NOT(var) (!(var))
 
 #endif // !_MACRO_H_
 

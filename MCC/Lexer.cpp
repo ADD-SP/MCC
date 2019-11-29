@@ -183,6 +183,19 @@ bool Lexer::_matchOperator(fstream& fs)
 			_tokens.push_back(new Operator(Operator::assign));
 		}
 		break;
+	case '!':
+		fs.get(c);
+		if (fs.peek() == '=')
+		{
+			fs.get(c);
+			_tokens.push_back(new Operator(Operator::notEqual));
+		}
+		else
+		{
+			_tokens.push_back(new Operator(Operator::no));
+		}
+		break;
+
 	default:
 		return false;
 		break;

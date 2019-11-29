@@ -26,6 +26,7 @@ AstNode* Parser::_parseBE()
 	if (type == Number::typeName
 		|| type == Interger::typeName
 		|| type == Decimal::typeName
+		|| type == Id::typeName
 		|| (type == Keyword::typeName && lexeme == "true")
 		|| (type == Keyword::typeName && lexeme == "false")
 		|| (type == Bracket::typeName && lexeme == "("))

@@ -29,12 +29,26 @@ size_t Token::getHashCode() const
 
 bool Token::isEqual(const Token& token) const
 {
-	throw exception();
+	if (this->getType() == token.getType())
+	{
+		return this->lexeme == token.lexeme;
+	}
+	else
+	{
+		return false;
+	}
 }
 
 bool Token::operator==(const Token& token) const
 {
-	throw exception();
+	if (this->getType() == token.getType())
+	{
+		return this->lexeme == token.lexeme;
+	}
+	else
+	{
+		return false;
+	}
 }
 
 bool Token::operator!=(const Token& token) const

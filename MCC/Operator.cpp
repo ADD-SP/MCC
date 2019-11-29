@@ -16,6 +16,8 @@ const int Operator::logicalAnd = 10;
 const int Operator::logicalOr = 11;
 const int Operator::bitAnd = 12;
 const int Operator::bitOr = 13;
+const int Operator::notEqual = 14;
+const int Operator::no = 15;
 
 Operator::Operator(OperatorType operatorType)
 	:Token("")
@@ -36,6 +38,12 @@ Operator::Operator(OperatorType operatorType)
 		break;
 	case equal:
 		lexeme = "==";
+		break;
+	case notEqual:
+		lexeme = "!=";
+		break;
+	case no:
+		lexeme = "!";
 		break;
 	case less:
 		lexeme = "<";

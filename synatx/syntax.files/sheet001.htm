@@ -1,0 +1,604 @@
+<html xmlns:v="urn:schemas-microsoft-com:vml"
+xmlns:o="urn:schemas-microsoft-com:office:office"
+xmlns:x="urn:schemas-microsoft-com:office:excel"
+xmlns="http://www.w3.org/TR/REC-html40">
+
+<head>
+<meta http-equiv=Content-Type content="text/html; charset=gb2312">
+<meta name=ProgId content=Excel.Sheet>
+<meta name=Generator content="Microsoft Excel 15">
+<link id=Main-File rel=Main-File href="../syntax.htm">
+<link rel=File-List href=filelist.xml>
+<link rel=Stylesheet href=stylesheet.css>
+<style>
+<!--table
+	{mso-displayed-decimal-separator:"\.";
+	mso-displayed-thousand-separator:"\,";}
+@page
+	{margin:.75in .7in .75in .7in;
+	mso-header-margin:.3in;
+	mso-footer-margin:.3in;}
+ruby
+	{ruby-align:left;}
+rt
+	{color:windowtext;
+	font-size:9.0pt;
+	font-weight:400;
+	font-style:normal;
+	text-decoration:none;
+	font-family:等线;
+	mso-generic-font-family:auto;
+	mso-font-charset:134;
+	mso-char-type:none;
+	display:none;}
+-->
+</style>
+<![if !supportTabStrip]><script language="JavaScript">
+<!--
+function fnUpdateTabs()
+ {
+  if (parent.window.g_iIEVer>=4) {
+   if (parent.document.readyState=="complete"
+    && parent.frames['frTabs'].document.readyState=="complete")
+   parent.fnSetActiveSheet(0);
+  else
+   window.setTimeout("fnUpdateTabs();",150);
+ }
+}
+
+if (window.name!="frSheet")
+ window.location.replace("../syntax.htm");
+else
+ fnUpdateTabs();
+//-->
+</script>
+<![endif]>
+</head>
+
+<body link="#0563C1" vlink="#954F72">
+
+<table border=0 cellpadding=0 cellspacing=0 width=997 style='border-collapse:
+ collapse;table-layout:fixed;width:748pt'>
+ <col class=xl88 width=64 style='width:48pt'>
+ <col class=xl89 width=230 style='mso-width-source:userset;mso-width-alt:8192;
+ width:173pt'>
+ <col class=xl76 width=268 style='mso-width-source:userset;mso-width-alt:9528;
+ width:201pt'>
+ <col class=xl100 width=243 style='mso-width-source:userset;mso-width-alt:8647;
+ width:182pt'>
+ <col class=xl76 width=64 span=2 style='width:48pt'>
+ <col class=xl70 width=64 style='width:48pt'>
+ <tr height=18 style='height:13.8pt'>
+  <td height=18 class=xl88 width=64 style='height:13.8pt;width:48pt'>开始符号</td>
+  <td class=xl89 width=230 style='border-left:none;width:173pt'>产生式</td>
+  <td class=xl76 width=268 style='border-left:none;width:201pt'>FIRST</td>
+  <td class=xl100 width=243 style='border-left:none;width:182pt'>FOLLOW</td>
+  <td class=xl76 width=64 style='border-left:none;width:48pt'>动作</td>
+  <td class=xl76 width=64 style='border-left:none;width:48pt'>说明</td>
+  <td class=xl70 width=64 style='border-left:none;width:48pt'>　</td>
+ </tr>
+ <tr class=xl65 height=18 style='height:13.8pt'>
+  <td height=18 class=xl90 style='height:13.8pt;border-top:none'>E</td>
+  <td class=xl91 style='border-top:none;border-left:none'>E-&gt; TE'</td>
+  <td class=xl77 style='border-top:none;border-left:none'>num id (</td>
+  <td class=xl101 style='border-top:none;border-left:none'>$ ) &amp;&amp; ||</td>
+  <td class=xl77 style='border-top:none;border-left:none'>　</td>
+  <td class=xl77 style='border-top:none;border-left:none'>　</td>
+  <td class=xl71 style='border-top:none;border-left:none'>　</td>
+ </tr>
+ <tr class=xl66 height=18 style='height:13.8pt'>
+  <td rowspan=3 height=59 class=xl126 style='height:45.0pt;border-top:none'>E'</td>
+  <td class=xl92 style='border-top:none;border-left:none'>E'-&gt;+TE'</td>
+  <td class=xl78 style='border-top:none;border-left:none'>+</td>
+  <td rowspan=3 class=xl123 style='border-bottom:.5pt solid black;border-top:
+  none'>$ ) &amp;&amp; ||</td>
+  <td class=xl78 style='border-top:none;border-left:none'>　</td>
+  <td class=xl78 style='border-top:none;border-left:none'>　</td>
+  <td class=xl72 style='border-top:none;border-left:none'>　</td>
+ </tr>
+ <tr class=xl66 height=18 style='height:13.8pt'>
+  <td height=18 class=xl92 style='height:13.8pt;border-top:none;border-left:
+  none'>E'-&gt;-TE'</td>
+  <td class=xl78 style='border-top:none;border-left:none'>-</td>
+  <td class=xl78 style='border-top:none;border-left:none'>　</td>
+  <td class=xl78 style='border-top:none;border-left:none'>　</td>
+  <td class=xl72 style='border-top:none;border-left:none'>　</td>
+ </tr>
+ <tr class=xl66 height=23 style='height:17.4pt'>
+  <td height=23 class=xl92 style='height:17.4pt;border-top:none;border-left:
+  none'>E'-&gt;<font class="font6">ε</font></td>
+  <td class=xl79 style='border-top:none;border-left:none'>ε</td>
+  <td class=xl78 style='border-top:none;border-left:none'>　</td>
+  <td class=xl78 style='border-top:none;border-left:none'>　</td>
+  <td class=xl72 style='border-top:none;border-left:none'>　</td>
+ </tr>
+ <tr class=xl67 height=18 style='height:13.8pt'>
+  <td height=18 class=xl93 style='height:13.8pt;border-top:none'>T</td>
+  <td class=xl85 style='border-top:none;border-left:none'>T-&gt;FT'</td>
+  <td class=xl80 style='border-top:none;border-left:none'>num id (</td>
+  <td class=xl102 style='border-top:none;border-left:none'>$ + -</td>
+  <td class=xl80 style='border-top:none;border-left:none'>　</td>
+  <td class=xl80 style='border-top:none;border-left:none'>　</td>
+  <td class=xl73 style='border-top:none;border-left:none'>　</td>
+ </tr>
+ <tr class=xl68 height=18 style='height:13.8pt'>
+  <td rowspan=3 height=59 class=xl127 style='height:45.0pt;border-top:none'>T'</td>
+  <td class=xl94 style='border-top:none;border-left:none'>T'-&gt;*FT'</td>
+  <td class=xl81 style='border-top:none;border-left:none'>*</td>
+  <td rowspan=3 class=xl124 style='border-bottom:.5pt solid black;border-top:
+  none'>$ + -</td>
+  <td class=xl81 style='border-top:none;border-left:none'>　</td>
+  <td class=xl81 style='border-top:none;border-left:none'>　</td>
+  <td class=xl74 style='border-top:none;border-left:none'>　</td>
+ </tr>
+ <tr class=xl68 height=18 style='height:13.8pt'>
+  <td height=18 class=xl94 style='height:13.8pt;border-top:none;border-left:
+  none'>T'-&gt;/FT'</td>
+  <td class=xl81 style='border-top:none;border-left:none'>/</td>
+  <td class=xl81 style='border-top:none;border-left:none'>　</td>
+  <td class=xl81 style='border-top:none;border-left:none'>　</td>
+  <td class=xl74 style='border-top:none;border-left:none'>　</td>
+ </tr>
+ <tr class=xl68 height=23 style='height:17.4pt'>
+  <td height=23 class=xl94 style='height:17.4pt;border-top:none;border-left:
+  none'>T'-&gt;<font class="font6">ε</font></td>
+  <td class=xl82 style='border-top:none;border-left:none'>ε</td>
+  <td class=xl81 style='border-top:none;border-left:none'>　</td>
+  <td class=xl81 style='border-top:none;border-left:none'>　</td>
+  <td class=xl74 style='border-top:none;border-left:none'>　</td>
+ </tr>
+ <tr class=xl69 height=18 style='height:13.8pt'>
+  <td rowspan=3 height=54 class=xl128 style='height:41.4pt;border-top:none'>F</td>
+  <td class=xl95 style='border-top:none;border-left:none'>F-&gt;num</td>
+  <td class=xl83 style='border-top:none;border-left:none'>num</td>
+  <td rowspan=3 class=xl125 style='border-bottom:.5pt solid black;border-top:
+  none'>$ * /</td>
+  <td class=xl83 style='border-top:none;border-left:none'>　</td>
+  <td class=xl83 style='border-top:none;border-left:none'>　</td>
+  <td class=xl75 style='border-top:none;border-left:none'>　</td>
+ </tr>
+ <tr class=xl69 height=18 style='height:13.8pt'>
+  <td height=18 class=xl95 style='height:13.8pt;border-top:none;border-left:
+  none'>F-&gt;LV F'</td>
+  <td class=xl83 style='border-top:none;border-left:none'>id</td>
+  <td class=xl83 style='border-top:none;border-left:none'>　</td>
+  <td class=xl83 style='border-top:none;border-left:none'>　</td>
+  <td class=xl75 style='border-top:none;border-left:none'>　</td>
+ </tr>
+ <tr class=xl69 height=18 style='height:13.8pt'>
+  <td height=18 class=xl95 style='height:13.8pt;border-top:none;border-left:
+  none'>F-&gt;(E）</td>
+  <td class=xl83 style='border-top:none;border-left:none'>(</td>
+  <td class=xl83 style='border-top:none;border-left:none'>　</td>
+  <td class=xl83 style='border-top:none;border-left:none'>　</td>
+  <td class=xl75 style='border-top:none;border-left:none'>　</td>
+ </tr>
+ <tr class=xl65 height=18 style='height:13.8pt'>
+  <td rowspan=2 height=41 class=xl106 style='height:31.2pt;border-top:none'>F'</td>
+  <td class=xl91 style='border-top:none;border-left:none'>F'-&gt;(CL)</td>
+  <td class=xl77 style='border-top:none;border-left:none'>(</td>
+  <td rowspan=2 class=xl114 style='border-bottom:.5pt solid black;border-top:
+  none'>$ * /</td>
+  <td class=xl77 style='border-top:none;border-left:none'>　</td>
+  <td class=xl77 style='border-top:none;border-left:none'>　</td>
+  <td class=xl71 style='border-top:none;border-left:none'>　</td>
+ </tr>
+ <tr class=xl65 height=23 style='height:17.4pt'>
+  <td height=23 class=xl91 style='height:17.4pt;border-top:none;border-left:
+  none'>F'-&gt;<font class="font6">ε</font></td>
+  <td class=xl84 style='border-top:none;border-left:none'>ε</td>
+  <td class=xl77 style='border-top:none;border-left:none'>　</td>
+  <td class=xl77 style='border-top:none;border-left:none'>　</td>
+  <td class=xl71 style='border-top:none;border-left:none'>　</td>
+ </tr>
+ <tr class=xl66 height=18 style='height:13.8pt'>
+  <td rowspan=2 height=41 class=xl126 style='height:31.2pt;border-top:none'>CL</td>
+  <td class=xl92 style='border-top:none;border-left:none'>CL-&gt;BE CL'</td>
+  <td class=xl78 style='border-top:none;border-left:none'>num id (</td>
+  <td rowspan=2 class=xl123 style='border-bottom:.5pt solid black;border-top:
+  none'>$ )</td>
+  <td class=xl78 style='border-top:none;border-left:none'>　</td>
+  <td class=xl78 style='border-top:none;border-left:none'>　</td>
+  <td class=xl72 style='border-top:none;border-left:none'>　</td>
+ </tr>
+ <tr class=xl66 height=23 style='height:17.4pt'>
+  <td height=23 class=xl92 style='height:17.4pt;border-top:none;border-left:
+  none'>CL-&gt;<font class="font6">ε</font></td>
+  <td class=xl79 style='border-top:none;border-left:none'>ε</td>
+  <td class=xl78 style='border-top:none;border-left:none'>　</td>
+  <td class=xl78 style='border-top:none;border-left:none'>　</td>
+  <td class=xl72 style='border-top:none;border-left:none'>　</td>
+ </tr>
+ <tr class=xl67 height=18 style='height:13.8pt'>
+  <td rowspan=2 height=41 class=xl129 style='height:31.2pt;border-top:none'>CL'</td>
+  <td class=xl85 style='border-top:none;border-left:none'>CL'-&gt;, BE CL'</td>
+  <td class=xl85 style='border-top:none;border-left:none'>,</td>
+  <td rowspan=2 class=xl116 style='border-bottom:.5pt solid black;border-top:
+  none'>$ )</td>
+  <td class=xl80 style='border-top:none;border-left:none'>　</td>
+  <td class=xl80 style='border-top:none;border-left:none'>　</td>
+  <td class=xl73 style='border-top:none;border-left:none'>　</td>
+ </tr>
+ <tr class=xl67 height=23 style='height:17.4pt'>
+  <td height=23 class=xl85 style='height:17.4pt;border-top:none;border-left:
+  none'>CL’-&gt;<font class="font6">ε</font></td>
+  <td class=xl86 style='border-top:none;border-left:none'>ε</td>
+  <td class=xl80 style='border-top:none;border-left:none'>　</td>
+  <td class=xl80 style='border-top:none;border-left:none'>　</td>
+  <td class=xl73 style='border-top:none;border-left:none'>　</td>
+ </tr>
+ <tr height=18 style='height:13.8pt'>
+  <td height=18 class=xl88 style='height:13.8pt;border-top:none'>　</td>
+  <td class=xl89 style='border-top:none;border-left:none'>　</td>
+  <td class=xl76 style='border-top:none;border-left:none'>　</td>
+  <td class=xl100 style='border-top:none;border-left:none'>　</td>
+  <td class=xl76 style='border-top:none;border-left:none'>　</td>
+  <td class=xl76 style='border-top:none;border-left:none'>　</td>
+  <td class=xl70 style='border-top:none;border-left:none'>　</td>
+ </tr>
+ <tr class=xl68 height=18 style='height:13.8pt'>
+  <td height=18 class=xl96 style='height:13.8pt;border-top:none'>BE</td>
+  <td class=xl94 style='border-top:none;border-left:none'>BE-&gt;BF BE'</td>
+  <td class=xl81 style='border-top:none;border-left:none'>num id (</td>
+  <td class=xl103 style='border-top:none;border-left:none'>$ , ) [ ;</td>
+  <td class=xl81 style='border-top:none;border-left:none'>　</td>
+  <td class=xl81 style='border-top:none;border-left:none'>　</td>
+  <td class=xl74 style='border-top:none;border-left:none'>　</td>
+ </tr>
+ <tr class=xl69 height=18 style='height:13.8pt'>
+  <td rowspan=3 height=59 class=xl128 style='height:45.0pt;border-top:none'>BE'</td>
+  <td class=xl95 style='border-top:none;border-left:none'>BE'-&gt;&amp;&amp; BF
+  BE'</td>
+  <td class=xl83 style='border-top:none;border-left:none'>&amp;&amp;</td>
+  <td rowspan=3 class=xl125 style='border-bottom:.5pt solid black;border-top:
+  none'>$ , ) [ ;</td>
+  <td class=xl83 style='border-top:none;border-left:none'>　</td>
+  <td class=xl83 style='border-top:none;border-left:none'>　</td>
+  <td class=xl75 style='border-top:none;border-left:none'>　</td>
+ </tr>
+ <tr class=xl69 height=18 style='height:13.8pt'>
+  <td height=18 class=xl95 style='height:13.8pt;border-top:none;border-left:
+  none'>BE'-&gt;|| BF BE'</td>
+  <td class=xl83 style='border-top:none;border-left:none'>||</td>
+  <td class=xl83 style='border-top:none;border-left:none'>　</td>
+  <td class=xl83 style='border-top:none;border-left:none'>　</td>
+  <td class=xl75 style='border-top:none;border-left:none'>　</td>
+ </tr>
+ <tr class=xl69 height=23 style='height:17.4pt'>
+  <td height=23 class=xl95 style='height:17.4pt;border-top:none;border-left:
+  none'>BE'-&gt;<font class="font6">ε</font></td>
+  <td class=xl87 style='border-top:none;border-left:none'>ε</td>
+  <td class=xl83 style='border-top:none;border-left:none'>　</td>
+  <td class=xl83 style='border-top:none;border-left:none'>　</td>
+  <td class=xl75 style='border-top:none;border-left:none'>　</td>
+ </tr>
+ <tr class=xl65 height=18 style='height:13.8pt'>
+  <td height=18 class=xl106 style='height:13.8pt;border-top:none'>BF</td>
+  <td class=xl91 style='border-top:none;border-left:none'>BF-&gt;E</td>
+  <td class=xl77 style='border-top:none;border-left:none'>num id (</td>
+  <td class=xl110 style='border-left:none'>$ &amp;&amp; ||</td>
+  <td class=xl77 style='border-top:none;border-left:none'>　</td>
+  <td class=xl77 style='border-top:none;border-left:none'>　</td>
+  <td class=xl71 style='border-top:none;border-left:none'>　</td>
+ </tr>
+ <tr height=18 style='height:13.8pt'>
+  <td height=18 class=xl108 style='height:13.8pt;border-top:none'>　</td>
+  <td class=xl89 style='border-top:none;border-left:none'>　</td>
+  <td class=xl76 style='border-top:none;border-left:none'>　</td>
+  <td class=xl109 style='border-left:none'>　</td>
+  <td class=xl76 style='border-top:none;border-left:none'>　</td>
+  <td class=xl76 style='border-top:none;border-left:none'>　</td>
+  <td class=xl70 style='border-top:none;border-left:none'>　</td>
+ </tr>
+ <tr class=xl66 height=18 style='height:13.8pt'>
+  <td height=18 class=xl99 style='height:13.8pt;border-top:none'>RV</td>
+  <td class=xl92 style='border-top:none;border-left:none'>RV-&gt; BE RV'</td>
+  <td class=xl78 style='border-top:none;border-left:none'>num id (</td>
+  <td class=xl104 style='border-top:none;border-left:none'>$ ; } ]</td>
+  <td class=xl78 style='border-top:none;border-left:none'>　</td>
+  <td class=xl78 style='border-top:none;border-left:none'>　</td>
+  <td class=xl72 style='border-top:none;border-left:none'>　</td>
+ </tr>
+ <tr class=xl67 height=18 style='height:13.8pt'>
+  <td rowspan=2 height=41 class=xl129 style='height:31.2pt'>RV'</td>
+  <td class=xl85 style='border-top:none;border-left:none'>RV'-&gt;[RV]</td>
+  <td class=xl80 style='border-top:none;border-left:none'>[</td>
+  <td rowspan=2 class=xl116 style='border-bottom:.5pt solid black;border-top:
+  none'>$ ; } ]</td>
+  <td class=xl80 style='border-top:none;border-left:none'>　</td>
+  <td class=xl80 style='border-top:none;border-left:none'>　</td>
+  <td class=xl73 style='border-top:none;border-left:none'>　</td>
+ </tr>
+ <tr class=xl67 height=23 style='height:17.4pt'>
+  <td height=23 class=xl85 style='height:17.4pt;border-top:none;border-left:
+  none'>RV'-&gt;<font class="font6">ε</font></td>
+  <td class=xl86 style='border-top:none;border-left:none'>ε</td>
+  <td class=xl80 style='border-top:none;border-left:none'>　</td>
+  <td class=xl80 style='border-top:none;border-left:none'>　</td>
+  <td class=xl73 style='border-top:none;border-left:none'>　</td>
+ </tr>
+ <tr height=18 style='height:13.8pt'>
+  <td height=18 class=xl88 style='height:13.8pt;border-top:none'>　</td>
+  <td class=xl89 style='border-top:none;border-left:none'>　</td>
+  <td class=xl76 style='border-top:none;border-left:none'>　</td>
+  <td class=xl100 style='border-top:none;border-left:none'>　</td>
+  <td class=xl76 style='border-top:none;border-left:none'>　</td>
+  <td class=xl76 style='border-top:none;border-left:none'>　</td>
+  <td class=xl70 style='border-top:none;border-left:none'>　</td>
+ </tr>
+ <tr class=xl68 height=18 style='height:13.8pt'>
+  <td height=18 class=xl96 style='height:13.8pt;border-top:none'>LV</td>
+  <td class=xl94 style='border-top:none;border-left:none'>LV-&gt;id LV'</td>
+  <td class=xl81 style='border-top:none;border-left:none'>id</td>
+  <td class=xl103 style='border-top:none;border-left:none'>$ ( =</td>
+  <td class=xl81 style='border-top:none;border-left:none'>　</td>
+  <td class=xl81 style='border-top:none;border-left:none'>　</td>
+  <td class=xl74 style='border-top:none;border-left:none'>　</td>
+ </tr>
+ <tr class=xl69 height=18 style='height:13.8pt'>
+  <td rowspan=2 height=41 class=xl128 style='height:31.2pt;border-top:none'>LV'</td>
+  <td class=xl95 style='border-top:none;border-left:none'>LV'-&gt;[RV]</td>
+  <td class=xl83 style='border-top:none;border-left:none'>[</td>
+  <td rowspan=2 class=xl125 style='border-bottom:.5pt solid black;border-top:
+  none'>$ ( =</td>
+  <td class=xl83 style='border-top:none;border-left:none'>　</td>
+  <td class=xl83 style='border-top:none;border-left:none'>　</td>
+  <td class=xl75 style='border-top:none;border-left:none'>　</td>
+ </tr>
+ <tr class=xl69 height=23 style='height:17.4pt'>
+  <td height=23 class=xl95 style='height:17.4pt;border-top:none;border-left:
+  none'>LV'-&gt;<font class="font6">ε</font></td>
+  <td class=xl87 style='border-top:none;border-left:none'>ε</td>
+  <td class=xl83 style='border-top:none;border-left:none'>　</td>
+  <td class=xl83 style='border-top:none;border-left:none'>　</td>
+  <td class=xl75 style='border-top:none;border-left:none'>　</td>
+ </tr>
+ <tr height=18 style='height:13.8pt'>
+  <td height=18 class=xl88 style='height:13.8pt;border-top:none'>　</td>
+  <td class=xl89 style='border-top:none;border-left:none'>　</td>
+  <td class=xl76 style='border-top:none;border-left:none'>　</td>
+  <td class=xl100 style='border-top:none;border-left:none'>　</td>
+  <td class=xl76 style='border-top:none;border-left:none'>　</td>
+  <td class=xl76 style='border-top:none;border-left:none'>　</td>
+  <td class=xl70 style='border-top:none;border-left:none'>　</td>
+ </tr>
+ <tr class=xl65 height=18 style='height:13.8pt'>
+  <td rowspan=7 height=131 class=xl106 style='height:100.2pt;border-top:none'>S</td>
+  <td class=xl91 style='border-top:none;border-left:none'>S-&gt;LV SLV;</td>
+  <td class=xl77 style='border-top:none;border-left:none'>id</td>
+  <td rowspan=7 class=xl114 style='border-bottom:.5pt solid black;border-top:
+  none'>$ }</td>
+  <td class=xl77 style='border-top:none;border-left:none'>　</td>
+  <td class=xl77 style='border-top:none;border-left:none'>　</td>
+  <td class=xl71 style='border-top:none;border-left:none'>　</td>
+ </tr>
+ <tr class=xl65 height=18 style='height:13.8pt'>
+  <td height=18 class=xl91 style='height:13.8pt;border-top:none;border-left:
+  none'>S-&gt;if (BE) {S} SIF</td>
+  <td class=xl77 style='border-top:none;border-left:none'>if</td>
+  <td class=xl77 style='border-top:none;border-left:none'>　</td>
+  <td class=xl77 style='border-top:none;border-left:none'>　</td>
+  <td class=xl71 style='border-top:none;border-left:none'>　</td>
+ </tr>
+ <tr class=xl65 height=18 style='height:13.8pt'>
+  <td height=18 class=xl91 style='height:13.8pt;border-top:none;border-left:
+  none'>S-&gt;while (BE) {S}</td>
+  <td class=xl77 style='border-top:none;border-left:none'>while</td>
+  <td class=xl77 style='border-top:none;border-left:none'>　</td>
+  <td class=xl77 style='border-top:none;border-left:none'>　</td>
+  <td class=xl71 style='border-top:none;border-left:none'>　</td>
+ </tr>
+ <tr class=xl65 height=18 style='height:13.8pt'>
+  <td height=18 class=xl91 style='height:13.8pt;border-top:none;border-left:
+  none'>S-&gt;for (type id = RV; BE; E) {S}</td>
+  <td class=xl77 style='border-top:none;border-left:none'>for</td>
+  <td class=xl77 style='border-top:none;border-left:none'>　</td>
+  <td class=xl77 style='border-top:none;border-left:none'>　</td>
+  <td class=xl71 style='border-top:none;border-left:none'>　</td>
+ </tr>
+ <tr class=xl65 height=18 style='height:13.8pt'>
+  <td height=18 class=xl91 style='height:13.8pt;border-top:none;border-left:
+  none'>S-&gt;{S}</td>
+  <td class=xl77 style='border-top:none;border-left:none'>{</td>
+  <td class=xl77 style='border-top:none;border-left:none'>　</td>
+  <td class=xl77 style='border-top:none;border-left:none'>　</td>
+  <td class=xl71 style='border-top:none;border-left:none'>　</td>
+ </tr>
+ <tr class=xl65 height=18 style='height:13.8pt'>
+  <td height=18 class=xl91 style='height:13.8pt;border-top:none;border-left:
+  none'>S-&gt;VD;</td>
+  <td class=xl77 style='border-top:none;border-left:none'>type</td>
+  <td class=xl77 style='border-top:none;border-left:none'>　</td>
+  <td class=xl77 style='border-top:none;border-left:none'>　</td>
+  <td class=xl71 style='border-top:none;border-left:none'>　</td>
+ </tr>
+ <tr class=xl65 height=23 style='height:17.4pt'>
+  <td height=23 class=xl91 style='height:17.4pt;border-top:none;border-left:
+  none'>S-&gt;<font class="font6">ε</font></td>
+  <td class=xl84 style='border-top:none;border-left:none'>ε</td>
+  <td class=xl77 style='border-top:none;border-left:none'>　</td>
+  <td class=xl77 style='border-top:none;border-left:none'>　</td>
+  <td class=xl71 style='border-top:none;border-left:none'>　</td>
+ </tr>
+ <tr class=xl66 height=18 style='height:13.8pt'>
+  <td rowspan=3 height=59 class=xl126 style='height:45.0pt;border-top:none'>SLV</td>
+  <td class=xl92 style='border-top:none;border-left:none'>SLV-&gt;=SLV'</td>
+  <td class=xl78 style='border-top:none;border-left:none'>=</td>
+  <td rowspan=3 class=xl123 style='border-bottom:.5pt solid black;border-top:
+  none'>$ ; }</td>
+  <td class=xl78 style='border-top:none;border-left:none'>　</td>
+  <td class=xl78 style='border-top:none;border-left:none'>　</td>
+  <td class=xl72 style='border-top:none;border-left:none'>　</td>
+ </tr>
+ <tr class=xl66 height=18 style='height:13.8pt'>
+  <td height=18 class=xl92 style='height:13.8pt;border-top:none;border-left:
+  none'>SLV-&gt;(CL)</td>
+  <td class=xl78 style='border-top:none;border-left:none'>(</td>
+  <td class=xl78 style='border-top:none;border-left:none'>　</td>
+  <td class=xl78 style='border-top:none;border-left:none'>　</td>
+  <td class=xl72 style='border-top:none;border-left:none'>　</td>
+ </tr>
+ <tr class=xl66 height=23 style='height:17.4pt'>
+  <td height=23 class=xl92 style='height:17.4pt;border-top:none;border-left:
+  none'>SLV-&gt;<font class="font6">ε</font></td>
+  <td class=xl79 style='border-top:none;border-left:none'>ε</td>
+  <td class=xl78 style='border-top:none;border-left:none'>　</td>
+  <td class=xl78 style='border-top:none;border-left:none'>　</td>
+  <td class=xl72 style='border-top:none;border-left:none'>　</td>
+ </tr>
+ <tr class=xl67 height=18 style='height:13.8pt'>
+  <td height=18 class=xl98 style='height:13.8pt'>SLV'</td>
+  <td class=xl85 style='border-top:none;border-left:none'>SLV'-&gt;RV</td>
+  <td class=xl80 style='border-top:none;border-left:none'>num id (</td>
+  <td class=xl102 style='border-top:none;border-left:none'>$ ; }</td>
+  <td class=xl80 style='border-top:none;border-left:none'>　</td>
+  <td class=xl80 style='border-top:none;border-left:none'>　</td>
+  <td class=xl73 style='border-top:none;border-left:none'>　</td>
+ </tr>
+ <tr class=xl68 height=18 style='height:13.8pt'>
+  <td rowspan=2 height=41 class=xl127 style='height:31.2pt;border-top:none'>SIF</td>
+  <td class=xl94 style='border-top:none;border-left:none'>SIF-&gt;else {S}</td>
+  <td class=xl81 style='border-top:none;border-left:none'>else</td>
+  <td rowspan=2 class=xl124 style='border-bottom:.5pt solid black;border-top:
+  none'>$ }</td>
+  <td class=xl81 style='border-top:none;border-left:none'>　</td>
+  <td class=xl81 style='border-top:none;border-left:none'>　</td>
+  <td class=xl74 style='border-top:none;border-left:none'>　</td>
+ </tr>
+ <tr class=xl68 height=23 style='height:17.4pt'>
+  <td height=23 class=xl94 style='height:17.4pt;border-top:none;border-left:
+  none'>SIF-&gt;<font class="font6">ε</font></td>
+  <td class=xl82 style='border-top:none;border-left:none'>ε</td>
+  <td class=xl81 style='border-top:none;border-left:none'>　</td>
+  <td class=xl81 style='border-top:none;border-left:none'>　</td>
+  <td class=xl74 style='border-top:none;border-left:none'>　</td>
+ </tr>
+ <tr height=18 style='height:13.8pt'>
+  <td height=18 class=xl88 style='height:13.8pt;border-top:none'>　</td>
+  <td class=xl89 style='border-top:none;border-left:none'>　</td>
+  <td class=xl76 style='border-top:none;border-left:none'>　</td>
+  <td class=xl100 style='border-top:none;border-left:none'>　</td>
+  <td class=xl76 style='border-top:none;border-left:none'>　</td>
+  <td class=xl76 style='border-top:none;border-left:none'>　</td>
+  <td class=xl70 style='border-top:none;border-left:none'>　</td>
+ </tr>
+ <tr class=xl69 height=18 style='height:13.8pt'>
+  <td height=18 class=xl97 style='height:13.8pt;border-top:none'>VD</td>
+  <td class=xl95 style='border-top:none;border-left:none'>VD-&gt; type id
+  VD'<span style='mso-spacerun:yes'>&nbsp;</span></td>
+  <td class=xl83 style='border-top:none;border-left:none'>type</td>
+  <td class=xl105 style='border-top:none;border-left:none'>$ } ;</td>
+  <td class=xl83 style='border-top:none;border-left:none'>　</td>
+  <td class=xl83 style='border-top:none;border-left:none'>　</td>
+  <td class=xl75 style='border-top:none;border-left:none'>　</td>
+ </tr>
+ <tr class=xl65 height=18 style='height:13.8pt'>
+  <td rowspan=3 height=59 class=xl111 style='border-bottom:.5pt solid black;
+  height:45.0pt;border-top:none'>VD'</td>
+  <td class=xl91 style='border-top:none;border-left:none'>VD'-&gt;=RV</td>
+  <td class=xl77 style='border-top:none;border-left:none'>=</td>
+  <td rowspan=3 class=xl114 style='border-bottom:.5pt solid black;border-top:
+  none'>$</td>
+  <td class=xl77 style='border-top:none;border-left:none'>　</td>
+  <td class=xl77 style='border-top:none;border-left:none'>　</td>
+  <td class=xl71 style='border-top:none;border-left:none'>　</td>
+ </tr>
+ <tr class=xl65 height=18 style='height:13.8pt'>
+  <td height=18 class=xl91 style='height:13.8pt;border-top:none;border-left:
+  none'>VD'-&gt;[RV]=RV</td>
+  <td class=xl77 style='border-top:none;border-left:none'>[</td>
+  <td class=xl77 style='border-top:none;border-left:none'>　</td>
+  <td class=xl77 style='border-top:none;border-left:none'>　</td>
+  <td class=xl71 style='border-top:none;border-left:none'>　</td>
+ </tr>
+ <tr class=xl65 height=23 style='height:17.4pt'>
+  <td height=23 class=xl91 style='height:17.4pt;border-top:none;border-left:
+  none'>VD'-&gt;<font class="font6">ε</font></td>
+  <td class=xl84 style='border-top:none;border-left:none'>ε</td>
+  <td class=xl77 style='border-top:none;border-left:none'>　</td>
+  <td class=xl77 style='border-top:none;border-left:none'>　</td>
+  <td class=xl71 style='border-top:none;border-left:none'>　</td>
+ </tr>
+ <tr height=18 style='height:13.8pt'>
+  <td height=18 class=xl88 style='height:13.8pt;border-top:none'>　</td>
+  <td class=xl89 style='border-top:none;border-left:none'>　</td>
+  <td class=xl76 style='border-top:none;border-left:none'>　</td>
+  <td class=xl100 style='border-top:none;border-left:none'>　</td>
+  <td class=xl76 style='border-top:none;border-left:none'>　</td>
+  <td class=xl76 style='border-top:none;border-left:none'>　</td>
+  <td class=xl70 style='border-top:none;border-left:none'>　</td>
+ </tr>
+ <tr class=xl66 height=18 style='height:13.8pt'>
+  <td height=18 class=xl107 style='height:13.8pt;border-top:none'>FD</td>
+  <td class=xl92 style='border-top:none;border-left:none'>FD-&gt;type id (CL)
+  FD'<span style='mso-spacerun:yes'>&nbsp;</span></td>
+  <td class=xl78 style='border-top:none;border-left:none'>type</td>
+  <td class=xl104 style='border-top:none;border-left:none'>$</td>
+  <td class=xl78 style='border-top:none;border-left:none'>　</td>
+  <td class=xl78 style='border-top:none;border-left:none'>　</td>
+  <td class=xl72 style='border-top:none;border-left:none'>　</td>
+ </tr>
+ <tr class=xl67 height=18 style='height:13.8pt'>
+  <td rowspan=2 height=41 class=xl118 style='border-bottom:.5pt solid black;
+  height:31.2pt;border-top:none'>FD'</td>
+  <td class=xl85 style='border-top:none;border-left:none'>FD'-&gt;{S}</td>
+  <td class=xl80 style='border-top:none;border-left:none'>{</td>
+  <td rowspan=2 class=xl116 style='border-bottom:.5pt solid black;border-top:
+  none'>$</td>
+  <td class=xl80 style='border-top:none;border-left:none'>　</td>
+  <td class=xl80 style='border-top:none;border-left:none'>　</td>
+  <td class=xl73 style='border-top:none;border-left:none'>　</td>
+ </tr>
+ <tr class=xl67 height=23 style='height:17.4pt'>
+  <td height=23 class=xl85 style='height:17.4pt;border-top:none;border-left:
+  none'>FD'-&gt;;</td>
+  <td class=xl86 style='border-top:none;border-left:none'>;</td>
+  <td class=xl80 style='border-top:none;border-left:none'>　</td>
+  <td class=xl80 style='border-top:none;border-left:none'>　</td>
+  <td class=xl73 style='border-top:none;border-left:none'>　</td>
+ </tr>
+ <tr height=18 style='height:13.8pt'>
+  <td height=18 class=xl88 style='height:13.8pt;border-top:none'>　</td>
+  <td class=xl89 style='border-top:none;border-left:none'>　</td>
+  <td class=xl76 style='border-top:none;border-left:none'>　</td>
+  <td class=xl100 style='border-top:none;border-left:none'>　</td>
+  <td class=xl76 style='border-top:none;border-left:none'>　</td>
+  <td class=xl76 style='border-top:none;border-left:none'>　</td>
+  <td class=xl70 style='border-top:none;border-left:none'>　</td>
+ </tr>
+ <tr class=xl68 height=23 style='height:17.4pt'>
+  <td rowspan=2 height=41 class=xl120 style='border-bottom:.5pt solid black;
+  height:31.2pt;border-top:none'>PR</td>
+  <td class=xl94 style='border-top:none;border-left:none'>PR-&gt;S</td>
+  <td class=xl81 style='border-top:none;border-left:none'>id if while for { <font
+  class="font6">ε</font></td>
+  <td class=xl103 style='border-top:none;border-left:none'>$</td>
+  <td class=xl81 style='border-top:none;border-left:none'>　</td>
+  <td class=xl81 style='border-top:none;border-left:none'>　</td>
+  <td class=xl74 style='border-top:none;border-left:none'>　</td>
+ </tr>
+ <tr class=xl68 height=18 style='height:13.8pt'>
+  <td height=18 class=xl94 style='height:13.8pt;border-top:none;border-left:
+  none'>PR-&gt;FD</td>
+  <td class=xl81 style='border-top:none;border-left:none'>type</td>
+  <td class=xl103 style='border-top:none;border-left:none'>$</td>
+  <td class=xl81 style='border-top:none;border-left:none'>　</td>
+  <td class=xl81 style='border-top:none;border-left:none'>　</td>
+  <td class=xl74 style='border-top:none;border-left:none'>　</td>
+ </tr>
+ <![if supportMisalignedColumns]>
+ <tr height=0 style='display:none'>
+  <td width=64 style='width:48pt'></td>
+  <td width=230 style='width:173pt'></td>
+  <td width=268 style='width:201pt'></td>
+  <td width=243 style='width:182pt'></td>
+  <td width=64 style='width:48pt'></td>
+  <td width=64 style='width:48pt'></td>
+  <td width=64 style='width:48pt'></td>
+ </tr>
+ <![endif]>
+</table>
+
+</body>
+
+</html>

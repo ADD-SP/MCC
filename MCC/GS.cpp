@@ -2,13 +2,18 @@
 
 const string GS::typeName = "GS";
 
-GS::GS(const char* lexeme)
-	:Token(lexeme)
+GS::GS(const char* lexeme, size_t line)
+	:Token(lexeme, line)
 {
 }
 
-GS::GS(const string& lexeme)
-	:Token(lexeme)
+GS::GS(const string& lexeme, size_t line)
+	:Token(lexeme, line)
+{
+}
+
+GS::GS(const GS& gs)
+	:Token(gs.lexeme, gs.line)
 {
 }
 

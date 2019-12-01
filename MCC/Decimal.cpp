@@ -2,18 +2,18 @@
 
 const string Decimal::typeName = "Decimal";
 
-Decimal::Decimal(const char* lexeme)
-	:Number(lexeme)
+Decimal::Decimal(const char* lexeme, size_t line)
+	:Number(lexeme, line)
 {
 }
 
-Decimal::Decimal(const string& lexeme)
-	:Number(lexeme)
+Decimal::Decimal(const string& lexeme, size_t line)
+	:Number(lexeme, line)
 {
 }
 
 Decimal::Decimal(const Decimal& decimal)
-	:Number(decimal.lexeme)
+	:Number(decimal.lexeme, decimal.line)
 {
 }
 

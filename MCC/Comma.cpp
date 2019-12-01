@@ -2,20 +2,20 @@
 
 const string Comma::typeName = "Comma";
 
-Comma::Comma(const char* lexeme)
-	:Token(lexeme)
+Comma::Comma(const char* lexeme, size_t line)
+	:Token(lexeme, line)
 {
 
 }
 
-Comma::Comma(const string& lexeme)
-	: Token(lexeme)
+Comma::Comma(const string& lexeme, size_t line)
+	: Token(lexeme, line)
 {
 
 }
 
 Comma::Comma(const Comma& comma)
-	: Token(comma.lexeme)
+	: Token(comma.lexeme, comma.line)
 {
 
 }

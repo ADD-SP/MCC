@@ -2,18 +2,18 @@
 
 const string Interger::typeName = "Interger";
 
-Interger::Interger(const char* lexeme)
-	:Number(lexeme)
+Interger::Interger(const char* lexeme, size_t line)
+	:Number(lexeme, line)
 {
 }
 
-Interger::Interger(const string& lexeme)
-	:Number(lexeme)
+Interger::Interger(const string& lexeme, size_t line)
+	:Number(lexeme, line)
 {
 }
 
 Interger::Interger(const Interger& interger)
-	:Number(interger.lexeme)
+	:Number(interger.lexeme, interger.line)
 {
 }
 

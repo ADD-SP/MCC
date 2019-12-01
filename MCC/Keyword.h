@@ -7,8 +7,8 @@ class Keyword :
 {
 public:
 	static const string typeName;
-	Keyword(const char* lexeme);
-	Keyword(const string& lexeme);
+	Keyword(const char* lexeme, size_t line);
+	Keyword(const string& lexeme, size_t line);
 	Keyword(const Keyword& keyword);
 	virtual string getType() const;
 };

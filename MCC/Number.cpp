@@ -2,18 +2,18 @@
 
 const string Number::typeName = "Number";
 
-Number::Number(const char* lexeme)
-	:Token(lexeme)
+Number::Number(const char* lexeme, size_t line)
+	:Token(lexeme, line)
 {
 }
 
-Number::Number(const string& lexeme)
-	:Token(lexeme)
+Number::Number(const string& lexeme, size_t line)
+	:Token(lexeme, line)
 {
 }
 
 Number::Number(const Number& number)
-	:Token(number.lexeme)
+	:Token(number.lexeme, number.line)
 {
 }
 

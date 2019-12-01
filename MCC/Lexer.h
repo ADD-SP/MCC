@@ -31,6 +31,7 @@ private:
 	static unordered_set<string> _keywords;
 	static unordered_set<string> _types;
 	vector<Token*> _tokens;
+	size_t _line = 1;
 	Index _index;
 	void _iniKeyWordsAndTypes();
 	void _handle(const string& filename);

@@ -39,6 +39,10 @@ void Lexer::_handle(const string& filename)
 		c = fs.peek();
 		while (c == ' ' || c == '\n' || c == '\t')
 		{
+			if (c == '\n')
+			{
+				_line++;
+			}
 			fs.get(c);
 			c = fs.peek();
 		}
@@ -87,27 +91,33 @@ bool Lexer::_matchOther(fstream& fs)
 	case ']':
 		fs.get(c);
 		lexeme.push_back(c);
-		_tokens.push_back(new Bracket(lexeme));
+		_tokens.push_back(new Bracket(lexeme, _line));
 		isFound = true;
 		break;
 	case '{':
 		environment.createNewEnvironment();
 		fs.get(c);
 		lexeme.push_back(c);
-		_tokens.push_back(new Bracket(lexeme));
+		_tokens.push_back(new Bracket(lexeme, _line));
 		isFound = true;
 		break;
 	case '}':
 		environment.exitCurrentEnvironment();
 		fs.get(c);
 		lexeme.push_back(c);
-		_tokens.push_back(new Bracket(lexeme));
+		_tokens.push_back(new Bracket(lexeme, _line));
 		isFound = true;
 		break;
 	case ';':
 		fs.get(c);
 		lexeme.push_back(c);
-		_tokens.push_back(new Semicolon(lexeme));
+		_tokens.push_back(new Semicolon(lexeme, _line));
+		isFound = true;
+		break;
+	case ',':
+		fs.get(c);
+		lexeme.push_back(c);
+		_tokens.push_back(new Comma(lexeme, _line));
 		isFound = true;
 		break;
 	default:
@@ -125,30 +135,30 @@ bool Lexer::_matchOperator(fstream& fs)
 	{
 	case '+':
 		fs.get(c);
-		_tokens.push_back(new Operator(Operator::plus));
+		_tokens.push_back(new Operator(Operator::plus, _line));
 		break;
 	case '-':
 		fs.get(c);
-		_tokens.push_back(new Operator(Operator::minus));
+		_tokens.push_back(new Operator(Operator::minus, _line));
 		break;
 	case '*':
 		fs.get(c);
-		_tokens.push_back(new Operator(Operator::star));
+		_tokens.push_back(new Operator(Operator::star, _line));
 		break;
 	case '/':
 		fs.get(c);
-		_tokens.push_back(new Operator(Operator::div));
+		_tokens.push_back(new Operator(Operator::div, _line));
 		break;
 	case '&':
 		fs.get(c);
 		if (fs.peek() == '&')
 		{
 			fs.get(c);
-			_tokens.push_back(new Operator(Operator::logicalAnd));
+			_tokens.push_back(new Operator(Operator::logicalAnd, _line));
 		}
 		else
 		{
-			_tokens.push_back(new Operator(Operator::bitAnd));
+			_tokens.push_back(new Operator(Operator::bitAnd, _line));
 		}
 		break;
 	case '|':
@@ -156,11 +166,11 @@ bool Lexer::_matchOperator(fstream& fs)
 		if (fs.peek() == '|')
 		{
 			fs.get(c);
-			_tokens.push_back(new Operator(Operator::logicalOr));
+			_tokens.push_back(new Operator(Operator::logicalOr, _line));
 		}
 		else
 		{
-			_tokens.push_back(new Operator(Operator::bitOr));
+			_tokens.push_back(new Operator(Operator::bitOr, _line));
 		}
 		break;
 
@@ -169,11 +179,11 @@ bool Lexer::_matchOperator(fstream& fs)
 		if (fs.peek() == '=')
 		{
 			fs.get(c);
-			_tokens.push_back(new Operator(Operator::lessEqual));
+			_tokens.push_back(new Operator(Operator::lessEqual, _line));
 		}
 		else
 		{
-			_tokens.push_back(new Operator(Operator::less));
+			_tokens.push_back(new Operator(Operator::less, _line));
 		}
 		break;
 	case '>':
@@ -181,11 +191,11 @@ bool Lexer::_matchOperator(fstream& fs)
 		if (fs.peek() == '=')
 		{
 			fs.get(c);
-			_tokens.push_back(new Operator(Operator::greateEqual));
+			_tokens.push_back(new Operator(Operator::greateEqual, _line));
 		}
 		else
 		{
-			_tokens.push_back(new Operator(Operator::greate));
+			_tokens.push_back(new Operator(Operator::greate, _line));
 		}
 		break;
 	case '=':
@@ -193,11 +203,11 @@ bool Lexer::_matchOperator(fstream& fs)
 		if (fs.peek() == '=')
 		{
 			fs.get(c);
-			_tokens.push_back(new Operator(Operator::equal));
+			_tokens.push_back(new Operator(Operator::equal, _line));
 		}
 		else
 		{
-			_tokens.push_back(new Operator(Operator::assign));
+			_tokens.push_back(new Operator(Operator::assign, _line));
 		}
 		break;
 	case '!':
@@ -205,11 +215,11 @@ bool Lexer::_matchOperator(fstream& fs)
 		if (fs.peek() == '=')
 		{
 			fs.get(c);
-			_tokens.push_back(new Operator(Operator::notEqual));
+			_tokens.push_back(new Operator(Operator::notEqual, _line));
 		}
 		else
 		{
-			_tokens.push_back(new Operator(Operator::no));
+			_tokens.push_back(new Operator(Operator::no, _line));
 		}
 		break;
 
@@ -246,11 +256,11 @@ bool Lexer::_matchNumber(fstream& fs)
 
 		if (isInterget)
 		{
-			_tokens.push_back(new Interger(lexeme));
+			_tokens.push_back(new Interger(lexeme, _line));
 		}
 		else
 		{
-			_tokens.push_back(new Decimal(lexeme));
+			_tokens.push_back(new Decimal(lexeme, _line));
 		}
 	}
 
@@ -277,16 +287,16 @@ bool Lexer::_matchIdOrKeyWord(fstream& fs)
 
 		if (_keywords.find(lexeme) != _keywords.end())
 		{
-			_tokens.push_back(new Keyword(lexeme));
+			_tokens.push_back(new Keyword(lexeme, _line));
 		}
 		else if (_types.find(lexeme) != _types.end())
 		{
-			_tokens.push_back(new Type(lexeme));
+			_tokens.push_back(new Type(lexeme, _line));
 		}
 		else
 		{
 			environment.insert(lexeme, SymbolTableItem(lexeme, g_getVar(), "", 0));
-			_tokens.push_back(new Id(lexeme));
+			_tokens.push_back(new Id(lexeme, _line));
 		}
 	}
 	return isIdOrKeyWord;

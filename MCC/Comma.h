@@ -8,8 +8,8 @@ class Comma :
 public:
 	static const string typeName;
 	string lexeme;
-	Comma(const char* lexeme);
-	Comma(const string& lexeme);
+	Comma(const char* lexeme, size_t line);
+	Comma(const string& lexeme, size_t line);
 	Comma(const Comma& comma);
 	virtual string getType() const;
 };

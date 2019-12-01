@@ -2,18 +2,18 @@
 
 const string Id::typeName = "Id";
 
-Id::Id(const char* lexeme)
-	:Token(lexeme)
+Id::Id(const char* lexeme, size_t line)
+	:Token(lexeme, line)
 {
 }
 
-Id::Id(const string& lexeme)
-	:Token(lexeme)
+Id::Id(const string& lexeme, size_t line)
+	:Token(lexeme, line)
 {
 }
 
 Id::Id(const Id& id)
-	:Token(id.lexeme)
+	:Token(id.lexeme, id.line)
 {
 }
 

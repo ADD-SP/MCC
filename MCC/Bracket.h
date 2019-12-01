@@ -5,8 +5,8 @@ class Bracket :
 {
 public:
 	static const string typeName;
-	Bracket(const char* lexeme);
-	Bracket(const string& lexeme);
+	Bracket(const char* lexeme, size_t line);
+	Bracket(const string& lexeme, size_t line);
 	Bracket(const Bracket& bracket);
 	virtual string getType() const;
 };

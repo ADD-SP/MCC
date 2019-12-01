@@ -11,8 +11,8 @@ class Number :
 {
 public:
 	static const string typeName;
-	Number(const char* lexeme);
-	Number(const string& lexeme);
+	Number(const char* lexeme, size_t line);
+	Number(const string& lexeme, size_t line);
 	Number(const Number& number);
 	virtual string getType() const;
 };

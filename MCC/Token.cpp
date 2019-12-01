@@ -2,19 +2,19 @@
 
 const string Token::typeName = "Token";
 
-Token::Token(const char* lexeme)
+Token::Token(const char* lexeme, size_t line)
+	:lexeme(lexeme), line(line)
 {
-	this->lexeme = lexeme;
 }
 
-Token::Token(const string& lexeme)
+Token::Token(const string& lexeme, size_t line)
+	:lexeme(lexeme), line(line)
 {
-	this->lexeme = lexeme;
 }
 
 Token::Token(const Token& token)
+	:lexeme(token.lexeme), line(token.line)
 {
-	this->lexeme = token.lexeme;
 }
 
 string Token::getType() const

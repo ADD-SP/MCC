@@ -11,7 +11,7 @@ public:
 	static const string typeName;
 	static const OperatorType plus, minus, star, div, equal, notEqual, no, assign, less, greate, lessEqual, greateEqual, logicalAnd, logicalOr, bitAnd, bitOr;
 	OperatorType operatorType;
-	Operator(OperatorType operatorType);
+	Operator(OperatorType operatorType, size_t line);
 	Operator(const Operator& op);
 	virtual string getType() const;
 };

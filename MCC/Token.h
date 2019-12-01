@@ -11,9 +11,10 @@ class Token
 {
 public:
 	static const string typeName;
+	size_t line;
 	string lexeme;
-	Token(const char* lexeme);
-	Token(const string& lexeme);
+	Token(const char* lexeme, size_t line);
+	Token(const string& lexeme, size_t line);
 	Token(const Token& token);
 	virtual string getType() const;
 	virtual size_t getHashCode() const;

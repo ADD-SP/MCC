@@ -7,8 +7,8 @@ class Semicolon :
 {
 public:
 	static const string typeName;
-	Semicolon(const char* lexeme);
-	Semicolon(const string& lexeme);
+	Semicolon(const char* lexeme, size_t line);
+	Semicolon(const string& lexeme, size_t line);
 	Semicolon(const Semicolon& semicolon);
 	virtual string getType() const;
 };

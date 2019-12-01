@@ -7,8 +7,8 @@ class Decimal :
 {
 public:
 	static const string typeName;
-	Decimal(const char* lexeme);
-	Decimal(const string& lexeme);
+	Decimal(const char* lexeme, size_t line);
+	Decimal(const string& lexeme, size_t line);
 	Decimal(const Decimal& decimal);
 	virtual string getType() const;
 };

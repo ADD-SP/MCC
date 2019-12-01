@@ -3,12 +3,12 @@
 const string EndToken::typeName = "EndToken";
 
 EndToken::EndToken()
-	:Token(typeName)
+	:Token(typeName, 0)
 {
 }
 
 EndToken::EndToken(const EndToken& endToken)
-	:Token(endToken.lexeme)
+	:Token(endToken.lexeme, 0)
 {
 }
 

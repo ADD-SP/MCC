@@ -19,8 +19,8 @@ const int Operator::bitOr = 13;
 const int Operator::notEqual = 14;
 const int Operator::no = 15;
 
-Operator::Operator(OperatorType operatorType)
-	:Token("")
+Operator::Operator(OperatorType operatorType, size_t line)
+	:Token("", line), operatorType(operatorType)
 {
 	switch (operatorType)
 	{
@@ -74,13 +74,11 @@ Operator::Operator(OperatorType operatorType)
 		break;
 
 	}
-	this->operatorType = operatorType;
 }
 
 Operator::Operator(const Operator& op)
-	:Token(op.lexeme)
+	:Token(op.lexeme, op.line), operatorType(op.operatorType)
 {
-	this->operatorType = op.operatorType;
 }
 
 string Operator::getType() const

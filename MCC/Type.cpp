@@ -2,18 +2,18 @@
 
 const string Type::typeName = "Type";
 
-Type::Type(const char* lexeme)
-	:Token(lexeme)
+Type::Type(const char* lexeme, size_t line)
+	:Token(lexeme, line)
 {
 }
 
-Type::Type(const string& lexeme)
-	:Token(lexeme)
+Type::Type(const string& lexeme, size_t line)
+	:Token(lexeme, line)
 {
 }
 
-Type::Type(const Type& id)
-	:Token(id.lexeme)
+Type::Type(const Type& type)
+	:Token(type.lexeme, type.line)
 {
 }
 

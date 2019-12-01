@@ -7,9 +7,9 @@ class Type :
 {
 public:
 	static const string typeName;
-	Type(const char* lexeme);
-	Type(const string& lexeme);
-	Type(const Type& id);
+	Type(const char* lexeme, size_t line);
+	Type(const string& lexeme, size_t line);
+	Type(const Type& type);
 	virtual string getType() const;
 };
 

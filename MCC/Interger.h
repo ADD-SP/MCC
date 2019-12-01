@@ -7,8 +7,8 @@ class Interger :
 {
 public:
 	static const string typeName;
-	Interger(const char* lexeme);
-	Interger(const string& lexeme);
+	Interger(const char* lexeme, size_t line);
+	Interger(const string& lexeme, size_t line);
 	Interger(const Interger& interger);
 	virtual string getType() const;
 };

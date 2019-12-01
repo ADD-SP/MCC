@@ -8,8 +8,8 @@ class Id :
 {
 public:
 	static const string typeName;
-	Id(const char* lexeme);
-	Id(const string& lexeme);
+	Id(const char* lexeme, size_t line);
+	Id(const string& lexeme, size_t line);
 	Id(const Id& id);
 	virtual string getType() const;
 };

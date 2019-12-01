@@ -7,8 +7,9 @@ class GS :
 {
 public:
 	static const string typeName;
-	GS(const char* lexeme);
-	GS(const string& lexeme);
+	GS(const char* lexeme, size_t line);
+	GS(const string& lexeme, size_t line);
+	GS(const GS& gs);
 	virtual string getType() const;
 };
 

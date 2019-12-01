@@ -2,18 +2,18 @@
 
 const string Bracket::typeName = "Bracket";
 
-Bracket::Bracket(const char* lexeme)
-	:Token(lexeme)
+Bracket::Bracket(const char* lexeme, size_t line)
+	:Token(lexeme, line)
 {
 }
 
-Bracket::Bracket(const string& lexeme)
-	:Token(lexeme)
+Bracket::Bracket(const string& lexeme, size_t line)
+	:Token(lexeme, line)
 {
 }
 
 Bracket::Bracket(const Bracket& bracket)
-	:Token(lexeme)
+	:Token(bracket.lexeme, bracket.line)
 {
 }
 

@@ -3,18 +3,18 @@
 const string Semicolon::typeName = "Semicolon";
 
 
-Semicolon::Semicolon(const char* lexeme)
-	:Token(lexeme)
+Semicolon::Semicolon(const char* lexeme, size_t line)
+	:Token(lexeme, line)
 {
 }
 
-Semicolon::Semicolon(const string& lexeme)
-	:Token(lexeme)
+Semicolon::Semicolon(const string& lexeme, size_t line)
+	:Token(lexeme, line)
 {
 }
 
 Semicolon::Semicolon(const Semicolon& semicolon)
-	:Token(semicolon.lexeme)
+	:Token(semicolon.lexeme, semicolon.line)
 {
 }
 

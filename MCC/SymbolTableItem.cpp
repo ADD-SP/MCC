@@ -3,17 +3,22 @@
 const int SymbolTableItem::read = 1;
 const int SymbolTableItem::write = 2;
 
-SymbolTableItem::SymbolTableItem(bool isVaild)
-	:_isVaild(isVaild), attribute(0)
+SymbolTableItem::SymbolTableItem()
+	:type("", -100),_isVaild(true), attribute(read | write)
 {
 }
 
-SymbolTableItem::SymbolTableItem(const char* id, const char* address, const char* type, int attribute)
+SymbolTableItem::SymbolTableItem(bool isVaild)
+	:_isVaild(isVaild), attribute(0), type("", -100)
+{
+}
+
+SymbolTableItem::SymbolTableItem(const char* id, const char* address, const Type& type, int attribute)
 	:id(id),address(address),type(type),attribute(attribute), _isVaild(true)
 {
 }
 
-SymbolTableItem::SymbolTableItem(const string& id, const string& address, const string& type, int attribute)
+SymbolTableItem::SymbolTableItem(const string& id, const string& address, const Type& type, int attribute)
 	: id(id), address(address), type(type), attribute(attribute), _isVaild(true)
 {
 }

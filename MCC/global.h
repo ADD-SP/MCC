@@ -7,6 +7,7 @@ using std::string;
 using std::reverse;
 
 string g_getVar();
+string g_getLabel();
 
 
 #endif // !_GLOBAL_H_

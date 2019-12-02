@@ -22,15 +22,16 @@ public:
 	Environment();
 	Environment(const Environment& envirment);
 	void createNewEnvironment();
-	void exitCurrentEnvironment();
-	void insert(const char* id, const SymbolTableItem& symbolTableItem);
-	void insert(const string& id, const SymbolTableItem& symbolTableItem);
+	void goNextEnvitonment();
+	void backPreviouEnvironment();
+	bool insert(const char* id, const SymbolTableItem& symbolTableItem);
+	bool insert(const string& id, const SymbolTableItem& symbolTableItem);
 	SymbolTableItem find(const char* id);
 	SymbolTableItem find(const string& id);
 	void modify(const char* id, const SymbolTableItem& newSymbolTableItem);
 	void modify(const string& id, const SymbolTableItem& newSymbolTableItem);
-	void erase(const char* id);
-	void erase(const string& id);
+	bool erase(const char* id);
+	bool erase(const string& id);
 	void backToTopEnvironment();
 
 };

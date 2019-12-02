@@ -95,14 +95,15 @@ bool Lexer::_matchOther(fstream& fs)
 		isFound = true;
 		break;
 	case '{':
-		environment.createNewEnvironment();
+		// environment.createNewEnvironment();
+		// environment.goNextEnvitonment();
 		fs.get(c);
 		lexeme.push_back(c);
 		_tokens.push_back(new Bracket(lexeme, _line));
 		isFound = true;
 		break;
 	case '}':
-		environment.exitCurrentEnvironment();
+		// environment.backPreviouEnvironment();
 		fs.get(c);
 		lexeme.push_back(c);
 		_tokens.push_back(new Bracket(lexeme, _line));
@@ -295,7 +296,7 @@ bool Lexer::_matchIdOrKeyWord(fstream& fs)
 		}
 		else
 		{
-			environment.insert(lexeme, SymbolTableItem(lexeme, g_getVar(), "", 0));
+			// environment.insert(lexeme, SymbolTableItem(lexeme, g_getVar(), "", 0));
 			_tokens.push_back(new Id(lexeme, _line));
 		}
 	}

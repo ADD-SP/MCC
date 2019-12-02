@@ -1,7 +1,8 @@
 #ifndef _MACRO_H_
 #define _MACRO_H_ 0
 
-#define CAST(pvar, type) (dynamic_cast<type>(pvar))
+#define DCAST(pvar, type) (dynamic_cast<type*>(pvar))
+#define SCAST(pvar, type) (static_cast<type>(pvar))
 #define GET_VALUE(pvar, index) ((*pvar)[index])
 #define GET_LEAF(pvar, index) ((*pvar)(index))
 #define CHECK_TYPE(pvar, type) (pvar->getType() == type::typeName)

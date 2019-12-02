@@ -3,6 +3,7 @@
 Environment::Environment()
 {
 	createNewEnvironment();
+	goNextEnvitonment();
 }
 
 Environment::Environment(const Environment& envirment)
@@ -12,11 +13,19 @@ Environment::Environment(const Environment& envirment)
 
 void Environment::createNewEnvironment()
 {
-	++_currentEnvirment;
 	_symbolTables.push_back(SymbolTable());
 }
 
-void Environment::exitCurrentEnvironment()
+void Environment::goNextEnvitonment()
+{
+	if (_currentEnvirment + 1 >= (Index)_symbolTables.size())
+	{
+		throw std::out_of_range("environment not exists");
+	}
+	++_currentEnvirment;
+}
+
+void Environment::backPreviouEnvironment()
 {
 	if (_currentEnvirment - 1 < 0)
 	{
@@ -25,21 +34,21 @@ void Environment::exitCurrentEnvironment()
 	--_currentEnvirment;
 }
 
-void Environment::insert(const char* id, const SymbolTableItem& symbolTableItem)
+bool Environment::insert(const char* id, const SymbolTableItem& symbolTableItem)
 {
-	_symbolTables[_currentEnvirment].insert(id, symbolTableItem);
+	return _symbolTables[_currentEnvirment].insert(id, symbolTableItem);
 }
 
-void Environment::insert(const string& id, const SymbolTableItem& symbolTableItem)
+bool Environment::insert(const string& id, const SymbolTableItem& symbolTableItem)
 {
-	_symbolTables[_currentEnvirment].insert(id, symbolTableItem);
+	return _symbolTables[_currentEnvirment].insert(id, symbolTableItem);
 }
 
 SymbolTableItem Environment::find(const char* id)
 {
 	for (Index i = _currentEnvirment; i >= 0; i--)
 	{
-		SymbolTableItem symbolTableItem = _symbolTables[_currentEnvirment].find(id);
+		SymbolTableItem symbolTableItem = _symbolTables[i].find(id);
 
 		if (symbolTableItem.isVaild())
 		{
@@ -53,7 +62,7 @@ SymbolTableItem Environment::find(const string& id)
 {
 	for (Index i = _currentEnvirment; i >= 0; i--)
 	{
-		SymbolTableItem symbolTableItem = _symbolTables[_currentEnvirment].find(id);
+		SymbolTableItem symbolTableItem = _symbolTables[i].find(id);
 
 		if (symbolTableItem.isVaild())
 		{
@@ -73,7 +82,7 @@ void Environment::modify(const string& id, const SymbolTableItem& newSymbolTable
 	_symbolTables[_currentEnvirment].modify(id, newSymbolTableItem);
 }
 
-void Environment::erase(const char* id)
+bool Environment::erase(const char* id)
 {
 	for (Index i = _currentEnvirment; i >= 0; i--)
 	{
@@ -81,13 +90,14 @@ void Environment::erase(const char* id)
 
 		if (symbolTableItem.isVaild())
 		{
-			_symbolTables[_currentEnvirment].erase(id);
+			return _symbolTables[_currentEnvirment].erase(id);
 			break;
 		}
 	}
+	return false;
 }
 
-void Environment::erase(const string& id)
+bool Environment::erase(const string& id)
 {
 	for (Index i = _currentEnvirment; i >= 0; i--)
 	{
@@ -95,10 +105,11 @@ void Environment::erase(const string& id)
 
 		if (symbolTableItem.isVaild())
 		{
-			_symbolTables[_currentEnvirment].erase(id);
+			return _symbolTables[_currentEnvirment].erase(id);
 			break;
 		}
 	}
+	return false;
 }
 
 void Environment::backToTopEnvironment()

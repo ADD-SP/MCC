@@ -1,10 +1,16 @@
 #include "AstNode.h"
 
+const size_t AstNode::left = 0;
+const size_t AstNode::mid = 1;
+const size_t AstNode::right = 2;
+
 AstNode::AstNode()
+	:order(left)
 {
 }
 
 AstNode::AstNode(size_t counts, ...)
+	:order(left)
 {
 	va_list args;
 	va_start(args, counts);
@@ -25,6 +31,16 @@ void AstNode::push_left(AstNode* astNode)
 void AstNode::push_right(AstNode* astNode)
 {
 	_leaves.push_back(astNode);
+}
+
+size_t AstNode::valueSize()
+{
+	return _values.size();
+}
+
+size_t AstNode::childSize()
+{
+	return _leaves.size();
 }
 
 void AstNode::push_back(const string& value)

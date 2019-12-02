@@ -1,7 +1,7 @@
 #include <iostream>
 #include "Parser.h"
 
-Lexer lexer("1.txt");
+Lexer lexer("1.c");
 
 int main()
 {

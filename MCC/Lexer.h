@@ -40,7 +40,7 @@ private:
 	bool _matchNumber(fstream& fs);
 	bool _matchIdOrKeyWord(fstream& fs);
 public:
-	Environment environment;
+	// Environment environment;
 	Lexer(const char* filename);
 	Lexer(const string& filename);
 	Token* nextToken();

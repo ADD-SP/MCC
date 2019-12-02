@@ -14,11 +14,15 @@ private:
 	vector<string> _values;
 	vector<AstNode*> _leaves;
 public:
+	size_t order;
+	static const size_t left, mid, right;
 	AstNode();
 	AstNode(size_t counts, ...);
 	AstNode(const AstNode& astNode);
 	void push_left(AstNode* astNode);
 	void push_right(AstNode* astNode);
+	size_t valueSize();
+	size_t childSize();
 	// void insert(AstNode* astNode, size_t index);
 	void push_back(const string& value);
 	void push_front(const string& value);

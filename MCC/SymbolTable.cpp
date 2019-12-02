@@ -10,14 +10,18 @@ SymbolTable::SymbolTable(const SymbolTable& symbolTabel)
 
 }
 
-void SymbolTable::insert(const char* id, const SymbolTableItem& symbolTableItem)
+bool SymbolTable::insert(const char* id, const SymbolTableItem& symbolTableItem)
 {
+	size_t oldSize = _map.size();
 	_map.insert(std::pair<string, SymbolTableItem>(id, symbolTableItem));
+	return !(oldSize == _map.size());
 }
 
-void SymbolTable::insert(const string& id, const SymbolTableItem& symbolTableItem)
+bool SymbolTable::insert(const string& id, const SymbolTableItem& symbolTableItem)
 {
+	size_t oldSize = _map.size();
 	_map.insert(std::pair<string, SymbolTableItem>(id, symbolTableItem));
+	return !(oldSize == _map.size());
 }
 
 SymbolTableItem SymbolTable::find(const char* id)
@@ -54,6 +58,9 @@ void SymbolTable::modify(const char* id, const SymbolTableItem& newSymbolTableIt
 	{
 		throw std::invalid_argument(id);
 	}
+
+	_map.erase(id);
+	this->insert(id, newSymbolTableItem);
 }
 
 void SymbolTable::modify(const string& id, const SymbolTableItem& newSymbolTableItem)
@@ -64,16 +71,19 @@ void SymbolTable::modify(const string& id, const SymbolTableItem& newSymbolTable
 	{
 		throw std::invalid_argument(id);
 	}
+
+	_map.erase(id);
+	this->insert(id, newSymbolTableItem);
 }
 
-void SymbolTable::erase(const char* id)
+bool SymbolTable::erase(const char* id)
 {
-	_map.erase(id);
+	return !(_map.erase(id) == 0);
 }
 
-void SymbolTable::erase(const string& id)
+bool SymbolTable::erase(const string& id)
 {
-	_map.erase(id);
+	return !(_map.erase(id) == 0);
 }
 
 void SymbolTable::clear()

@@ -12,11 +12,13 @@ private:
 	const bool _isVaild;
 public:
 	static const int read, write;
-	string id, address, type;
+	string id, address;
+	Type type;
 	int attribute;
+	SymbolTableItem();
 	SymbolTableItem(bool isVaild);
-	SymbolTableItem(const char* id, const char* address, const char* type, int attribute);
-	SymbolTableItem(const string& id, const string& address, const string& type, int attribute);
+	SymbolTableItem(const char* id, const char* address, const Type& type, int attribute);
+	SymbolTableItem(const string& id, const string& address, const Type& type, int attribute);
 	SymbolTableItem(const SymbolTableItem& symbolTabelItem);
 	bool isVaild();
 	bool canRead();

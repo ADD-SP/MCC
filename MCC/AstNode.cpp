@@ -1,16 +1,26 @@
 #include "AstNode.h"
 
-const size_t AstNode::left = 0;
-const size_t AstNode::mid = 1;
-const size_t AstNode::right = 2;
+const size_t AstNode::eLeft = 0;
+const size_t AstNode::eMid = 1;
+const size_t AstNode::eRight = 2;
+const size_t AstNode::left = 3;
+const size_t AstNode::mid = 4;
+const size_t AstNode::right = 5;
+const size_t AstNode::sIf = 6;
+const size_t AstNode::sElse = 7;
+const size_t AstNode::sWhile = 8;
+const size_t AstNode::sFor = 9;
+const size_t AstNode::_vd = 10;
+const size_t AstNode::notGen = 11;
+
 
 AstNode::AstNode()
-	:order(left)
+	:order(eLeft)
 {
 }
 
 AstNode::AstNode(size_t counts, ...)
-	:order(left)
+	:order(eLeft)
 {
 	va_list args;
 	va_start(args, counts);

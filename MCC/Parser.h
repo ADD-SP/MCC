@@ -26,21 +26,27 @@ using std::stod;
 class Parser
 {
 private:
-	 Lexer& _lexer;
-	 Environment envir;
-	 Ast _ast;
+	Lexer& _lexer;
+	Environment envir;
+	Ast _ast;
+	stack<string> _loopEndLabel;
+	stack<string> _loopBoolLabel;
 
 	void _gen(string str);
+
+	void _gen(AstNode* root);
 
 	void _isDeclare(Id* id);
 
 	void _pushValue(AstNode* left, AstNode* right,size_t start);
 
-	void _reGenTAC(AstNode* root);
-
 	AstNode* _parsePR();
 
-	AstNode* _parseS();
+	AstNode* _parseFE();
+
+	AstNode* _parse_FE(const string& id);
+
+	AstNode* _parseS(bool canGen = true);
 
 	AstNode* _parseSIF();
 

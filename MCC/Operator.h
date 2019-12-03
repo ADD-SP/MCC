@@ -9,7 +9,7 @@ class Operator :
 {
 public:
 	static const string typeName;
-	static const OperatorType plus, minus, star, div, equal, notEqual, no, assign, less, greate, lessEqual, greateEqual, logicalAnd, logicalOr, bitAnd, bitOr;
+	static const OperatorType plus, minus, star, div, mod, equal, notEqual, no, assign, less, greate, lessEqual, greateEqual, logicalAnd, logicalOr, bitAnd, bitOr, inc, dec;
 	OperatorType operatorType;
 	Operator(OperatorType operatorType, size_t line);
 	Operator(const Operator& op);

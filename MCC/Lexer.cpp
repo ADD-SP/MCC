@@ -136,11 +136,27 @@ bool Lexer::_matchOperator(fstream& fs)
 	{
 	case '+':
 		fs.get(c);
-		_tokens.push_back(new Operator(Operator::plus, _line));
+		if (fs.peek() == '+')
+		{
+			fs.get(c);
+			_tokens.push_back(new Operator(Operator::inc, _line));
+		}
+		else
+		{
+			_tokens.push_back(new Operator(Operator::plus, _line));
+		}
 		break;
 	case '-':
 		fs.get(c);
-		_tokens.push_back(new Operator(Operator::minus, _line));
+		if (fs.peek() == '-')
+		{
+			fs.get(c);
+			_tokens.push_back(new Operator(Operator::dec, _line));
+		}
+		else
+		{
+			_tokens.push_back(new Operator(Operator::minus, _line));
+		}
 		break;
 	case '*':
 		fs.get(c);
@@ -149,6 +165,10 @@ bool Lexer::_matchOperator(fstream& fs)
 	case '/':
 		fs.get(c);
 		_tokens.push_back(new Operator(Operator::div, _line));
+		break;
+	case '%':
+		fs.get(c);
+		_tokens.push_back(new Operator(Operator::mod, _line));
 		break;
 	case '&':
 		fs.get(c);

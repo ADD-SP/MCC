@@ -15,7 +15,7 @@ private:
 	vector<AstNode*> _leaves;
 public:
 	size_t order;
-	static const size_t left, mid, right;
+	static const size_t left, mid, right, eLeft, eMid, eRight, sIf, sElse, sWhile, sFor, _vd, notGen;
 	AstNode();
 	AstNode(size_t counts, ...);
 	AstNode(const AstNode& astNode);

@@ -351,6 +351,33 @@ AstNode* Parser::_parseS(bool canGen)
 		p->order = AstNode::notGen;
 		return p;
 	}
+	else if (CHECK_TYPE_VALUE(token, Keyword, "return"))
+	{
+		token = _lexer.nextToken();
+		token = _lexer.peek();
+		if (CHECK_TYPE(token, Number)
+			|| CHECK_TYPE(token, Decimal)
+			|| CHECK_TYPE(token, Interger)
+			|| CHECK_TYPE(token, Id)
+			|| CHECK_TYPE_VALUE(token, Bracket, "("))
+		{
+			first = _parseRV();
+			p->push_back("RET " + GET_VALUE(first, 0));
+		}
+		else if (CHECK_TYPE_VALUE(token, Keyword, "true")
+			|| CHECK_TYPE_VALUE(token, Keyword, "false"))
+		{
+			token = _lexer.nextToken();
+			p->push_back("RET " + token->lexeme);
+		}
+		else
+		{
+			p->push_back("RET");
+		}
+		TRY_MATCH_TOKEN_TYPE(_lexer, token, Semicolon);
+		p->order = AstNode::right;
+		return p;
+	}
 	else if (CHECK_TYPE_VALUE(token, Keyword, "break"))
 	{
 		token = _lexer.nextToken();
@@ -726,6 +753,8 @@ AstNode* Parser::_parseFD()
 	if (CHECK_TYPE(token, Type))
 	{
 		token = _lexer.nextToken();
+		envir.createNewEnvironment();
+		envir.goNextEnvitonment();
 		Type* type = DCAST(token, Type);
 		SymbolTableItem symbolTableItem;
 		symbolTableItem.type = *type;
@@ -763,8 +792,6 @@ AstNode* Parser::_parse_FD()
 	}
 	else if (CHECK_TYPE_VALUE(token, Bracket, "{"))
 	{
-		envir.createNewEnvironment();
-		envir.goNextEnvitonment();
 		token = _lexer.nextToken();
 		first = _parseS();
 		while (first)
@@ -796,6 +823,7 @@ AstNode* Parser::_parsePL()
 		symbolTableItem.address = g_getVar();
 		TRY_MATCH_TOKEN_TYPE(_lexer, token, Id);
 		symbolTableItem.id = token->lexeme;
+		envir.insert(symbolTableItem.id, symbolTableItem);
 		first = _parse_PL();
 		p->push_right(first);
 	}
@@ -1425,7 +1453,7 @@ AstNode* Parser::_parse_F(const string& id)
 		p->push_back(var);
 		p->push_back(expr);
 		p->push_right(first);
-		p->order = AstNode::left;
+		p->order = AstNode::eLeft;
 		return p;
 	}
 	else if (NOT(CHECK_TYPE(token, EndToken)

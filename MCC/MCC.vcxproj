@@ -131,6 +131,7 @@
     <ClInclude Include="Decimal.h" />
     <ClInclude Include="EndToken.h" />
     <ClInclude Include="Environment.h" />
+    <ClInclude Include="FourTuple.h" />
     <ClInclude Include="global.h" />
     <ClInclude Include="GS.h" />
     <ClInclude Include="Id.h" />
@@ -158,6 +159,7 @@
     <ClCompile Include="Decimal.cpp" />
     <ClCompile Include="EndToken.cpp" />
     <ClCompile Include="Environment.cpp" />
+    <ClCompile Include="FourTuple.cpp" />
     <ClCompile Include="global.cpp" />
     <ClCompile Include="GS.cpp" />
     <ClCompile Include="Id.cpp" />

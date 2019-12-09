@@ -1,5 +1,10 @@
 #ifndef _INTERGER_H_
 #define _INTERGER_H_ 0
+
+/*
+	这个Token表示整数
+*/
+
 #include "Number.h"
 
 class Interger :

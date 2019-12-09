@@ -1,6 +1,10 @@
 #ifndef _COMMA_H_
 #define _COMMA_H_ 0
 
+/*
+	这个Token代表的是半角逗号
+*/
+
 #include "Token.h"
 class Comma :
 	public Token

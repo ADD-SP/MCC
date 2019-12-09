@@ -1,5 +1,10 @@
 #ifndef _GS_H_
 #define _GS_H_ 0
+
+/*
+	这个类暂时弃用
+*/
+
 #include "Token.h"
 
 class GS :

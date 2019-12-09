@@ -23,9 +23,49 @@ const int Operator::inc = 17;
 const int Operator::dec = 18;
 
 
+void Operator::iniMap()
+{
+	if (_map.size() == 0)
+	{
+		_map.insert(std::pair<string, OperatorType>("+", plus));
+		_map.insert(std::pair<string, OperatorType>("-", minus));
+		_map.insert(std::pair<string, OperatorType>("*", star));
+		_map.insert(std::pair<string, OperatorType>("/", div));
+		_map.insert(std::pair<string, OperatorType>("%", mod));
+		_map.insert(std::pair<string, OperatorType>("&", bitAnd));
+		_map.insert(std::pair<string, OperatorType>("|", bitOr));
+		_map.insert(std::pair<string, OperatorType>("=", assign));
+		_map.insert(std::pair<string, OperatorType>("!", no));
+		_map.insert(std::pair<string, OperatorType>(">", greate));
+		_map.insert(std::pair<string, OperatorType>("<", less));
+		_map.insert(std::pair<string, OperatorType>("=", assign));
+		_map.insert(std::pair<string, OperatorType>("==", equal));
+		_map.insert(std::pair<string, OperatorType>(">=", greateEqual));
+		_map.insert(std::pair<string, OperatorType>("<=", less));
+		_map.insert(std::pair<string, OperatorType>("!=", notEqual));
+		_map.insert(std::pair<string, OperatorType>("&&", logicalAnd));
+		_map.insert(std::pair<string, OperatorType>("||", logicalOr));
+		_map.insert(std::pair<string, OperatorType>("++", inc));
+		_map.insert(std::pair<string, OperatorType>("--", dec));
+	}
+}
+
+Operator::Operator()
+	:Token("", -2), operatorType(-1)
+{
+	iniMap();
+}
+
+Operator::Operator(bool isVaild)
+	:Token("", -2), _isVaild(isVaild), operatorType(-1)
+{
+	iniMap();
+}
+
 Operator::Operator(OperatorType operatorType, size_t line)
 	:Token("", line), operatorType(operatorType)
 {
+	iniMap();
 	switch (operatorType)
 	{
 	case plus:
@@ -88,12 +128,29 @@ Operator::Operator(OperatorType operatorType, size_t line)
 	}
 }
 
+Operator::Operator(const string& op, size_t line)
+	:Token(op, line)
+{
+	iniMap();
+	auto itor = _map.find(op);
+	if (itor == _map.end())
+	{
+		throw exception();
+	}
+	this->operatorType = itor->second;
+}
+
 Operator::Operator(const Operator& op)
-	:Token(op.lexeme, op.line), operatorType(op.operatorType)
+	:Token(op.lexeme, op.line), operatorType(op.operatorType), _isVaild(op.isVaild())
 {
 }
 
 string Operator::getType() const
 {
-	return this->typeName;
+	return this->isVaild() ? this->typeName : "";
+}
+
+bool Operator::isVaild() const
+{
+	return this->_isVaild;
 }

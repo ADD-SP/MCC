@@ -1,6 +1,10 @@
 #ifndef _PARSER_H_
 #define _PARSER_H_ 0
 
+/*
+	语法分析器，语法规则和LL(1)分析表见项目根目录中的syntax文件夹
+*/
+
 
 #include <iostream>
 #include <stack>
@@ -14,6 +18,7 @@
 #include "Environment.h"
 #include "Ast.h"
 #include "macro.h"
+#include "FourTuple.h"
 
 
 using std::cout;
@@ -26,20 +31,36 @@ using std::stod;
 class Parser
 {
 private:
+	// 一个词法分析器
 	Lexer& _lexer;
+	// 变量作用域
 	Environment envir;
+	// 抽象语法树
 	Ast _ast;
+	// 用来记录最内层循环的结束地址
 	stack<string> _loopEndLabel;
+	// 用来记录最内层循环的开始地址（包括循环条件判断）
 	stack<string> _loopBoolLabel;
+	// 字符串分割
+	vector<string> _split(const string& str,char pattern);
 
+	// 将三地址码转化为四元组
 	void _gen(string str);
 
+	// 按照指定的顺序遍历AstNode
 	void _gen(AstNode* root);
 
+	// 判断某个标识符是否声明
 	void _isDeclare(Id* id);
 
+	// 暂时弃用
 	void _pushValue(AstNode* left, AstNode* right,size_t start);
 
+	/*
+		下列函数的命名格式为_parse + 文法符号
+		其中下划线代表' ' '（撇），如_E代表E'
+		文法符号的意义见项目根目录中的syntax文件夹
+	*/
 	AstNode* _parsePR();
 
 	AstNode* _parseFE();
@@ -99,9 +120,10 @@ private:
 
 
 public:
-	Parser(Lexer& lexer);
+	// 用来存储生成的四元组
+	vector<FourTuple> fourTuples;
 
-	void parse();
+	Parser(Lexer& lexer);
 };
 
 #endif // !_PARSER_H_

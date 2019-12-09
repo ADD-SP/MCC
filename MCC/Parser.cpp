@@ -1,8 +1,61 @@
 #include "Parser.h"
 
+vector<string> Parser::_split(const string& str, char pattern)
+{
+	vector<string> ret;
+	string temp;
+
+	for (auto itor = str.begin(); itor != str.end(); ++itor)
+	{
+		if (*itor == pattern)
+		{
+			ret.push_back(temp);
+			temp.clear();
+		}
+		else
+		{
+			temp.push_back(*itor);
+		}
+	}
+	ret.push_back(temp);
+	return ret;
+}
+
 void Parser::_gen(string str)
 {
-	cout << str << endl;
+	auto temp = _split(str, ' ');
+
+	if (temp.size() == 1)
+	{
+		fourTuples.push_back(FourTuple(temp[0]));
+	}
+	else if (temp.size() == 2)
+	{
+		fourTuples.push_back(FourTuple(temp[0], temp[1]));
+	}
+	else if (temp.size() == 3)
+	{
+		if (temp[1] == "=")
+		{
+			fourTuples.push_back(FourTuple(temp[0], Operator(false), temp[2], FourTuple::NOP));
+		}
+		else
+		{
+			fourTuples.push_back(FourTuple(temp[0], temp[1], temp[2]));
+		}
+	}
+	else if (temp.size() == 5)
+	{
+		Operator op = Operator(temp[3], 10);
+		fourTuples.push_back(FourTuple(temp[0], op, temp[2], temp[4]));
+	}
+	else if (temp.size() != 0)
+	{
+		throw exception();
+	}
+
+
+	// cout << str << endl;
 }
 
 void Parser::_gen(AstNode* root)
@@ -138,7 +191,7 @@ void Parser::_gen(AstNode* root)
 		// labelEnd
 		_gen(GET_VALUE(root, 5));
 	}
-	else if (root->order == AstNode::_vd)
+	else if (root->order == AstNode::sVd)
 	{
 		// RV
 		// _gen(GET_LEAF(root, 0));
@@ -228,7 +281,6 @@ AstNode* Parser::_parseFE()
 		token = _lexer.nextToken();
 		first = _parse_FE(token->lexeme);
 		TRY_MATCH_TOKEN_TYPE(_lexer, token, Id);
-		// p->push_right(first);
 		var = g_getVar();
 
 		if (first)
@@ -251,7 +303,6 @@ AstNode* Parser::_parseFE()
 		token = _lexer.nextToken();
 		first = _parse_FE(token->lexeme);
 		TRY_MATCH_TOKEN_TYPE(_lexer, token, Id);
-		// p->push_right(first);
 		var = g_getVar();
 
 		if (first)
@@ -289,7 +340,6 @@ AstNode* Parser::_parse_FE(const string& id)
 		expr = id + " = " + GET_VALUE(first, 0);
 		p->push_back(expr);
 		p->order = AstNode::right;
-		// _gen(expr);
 		return p;
 	}
 	else if (CHECK_TYPE_VALUE(token, Operator, "++"))
@@ -381,7 +431,6 @@ AstNode* Parser::_parseS(bool canGen)
 	else if (CHECK_TYPE_VALUE(token, Keyword, "break"))
 	{
 		token = _lexer.nextToken();
-		// _gen("JMP " + _loopEndLabel.top());
 		p->push_back("JMP " + _loopEndLabel.top());
 		TRY_MATCH_TOKEN_TYPE(_lexer, token, Semicolon);
 		p->order = AstNode::left;
@@ -390,7 +439,6 @@ AstNode* Parser::_parseS(bool canGen)
 	else if (CHECK_TYPE_VALUE(token, Keyword, "continue"))
 	{
 		token = _lexer.nextToken();
-		// _gen("JMP " + _loopBoolLabel.top());
 		p->push_back("JMP " + _loopBoolLabel.top());
 		TRY_MATCH_TOKEN_TYPE(_lexer, token, Semicolon);
 		p->order = AstNode::left;
@@ -401,14 +449,12 @@ AstNode* Parser::_parseS(bool canGen)
 		token = _lexer.nextToken();
 		TRY_MATCH_TOKEN_TYPE_VALUE(_lexer, token, Bracket, "(");
 		first = _parseBE();
-		// _gen(first);
 		p->push_right(first);
 		TRY_MATCH_TOKEN_TYPE_VALUE(_lexer, token, Bracket, ")");
 		TRY_MATCH_TOKEN_TYPE_VALUE(_lexer, token, Bracket, "{");
 		envir.createNewEnvironment();
 		envir.goNextEnvitonment();
 		string labelElse = g_getLabel(), labelEnd = g_getLabel();
-		// _gen("CNJMP " + GET_VALUE(first, 0) + " " + labelElse);
 		p->push_back("CNJMP " + GET_VALUE(first, 0) + " " + labelElse);
 		second = _parseS();
 		while (second)
@@ -416,16 +462,12 @@ AstNode* Parser::_parseS(bool canGen)
 			p->push_right(second);
 			second = _parseS();
 		}
-		// _gen(second);
-		// _gen("JMP " + labelEnd);
 		p->push_back("JMP " + labelEnd);
 		TRY_MATCH_TOKEN_TYPE_VALUE(_lexer, token, Bracket, "}");
 		envir.backPreviouEnvironment();
-		// _gen(labelElse + ":");
 		p->push_back(labelElse + ":");
 		third = _parseSIF();
 		p->push_right(third);
-		// _gen(labelEnd + ":");
 		p->push_back(labelEnd + ":");
 		p->order = AstNode::sIf;
 		return p;
@@ -438,18 +480,13 @@ AstNode* Parser::_parseS(bool canGen)
 		_loopBoolLabel.push(labelBool);
 		TRY_MATCH_TOKEN_TYPE_VALUE(_lexer, token, Bracket, "(");
 		first = _parseBE();
-		// _gen(labelBool + ":");
 		p->push_back(labelBool + ":");
-		// _gen(first);
 		p->push_right(first);
 		TRY_MATCH_TOKEN_TYPE_VALUE(_lexer, token, Bracket, ")");
 		TRY_MATCH_TOKEN_TYPE_VALUE(_lexer, token, Bracket, "{");
 		envir.createNewEnvironment();
 		envir.goNextEnvitonment();
-
-		// _gen(labelWhile + ":");
 		p->push_back(labelWhile + ":");
-		// _gen("CNJMP " + GET_VALUE(first, 0) + " " + labelEnd);
 		p->push_back("CNJMP " + GET_VALUE(first, 0) + " " + labelEnd);
 		second = _parseS();
 		while (second)
@@ -457,11 +494,8 @@ AstNode* Parser::_parseS(bool canGen)
 			p->push_right(second);
 			second = _parseS();
 		}
-		// _gen(second);
 		p->push_right(second);
-		// _gen("JMP " + labelBool);
 		p->push_back("JMP " + labelBool);
-		//_gen(labelEnd + ":");
 		p->push_back(labelEnd + ":");
 		TRY_MATCH_TOKEN_TYPE_VALUE(_lexer, token, Bracket, "}");
 		_loopEndLabel.pop();
@@ -485,28 +519,19 @@ AstNode* Parser::_parseS(bool canGen)
 		string id = token->lexeme;
 		TRY_MATCH_TOKEN_TYPE_VALUE(_lexer, token, Operator, "=");
 		first = _parseRV();
-		// _gen(first);
 		envir.insert(id, SymbolTableItem(id, g_getVar(), *type, SymbolTableItem::read | SymbolTableItem::write));
-		// _gen(id + " = " + GET_VALUE(first, 0));
 		p->push_back(id + " = " + GET_VALUE(first, 0));
 		p->push_right(first);
 		TRY_MATCH_TOKEN_TYPE(_lexer, token, Semicolon);
 		second = _parseBE();
-		// _gen(labelBool + ":");
 		p->push_back(labelBool + ":");
-		// _gen(second);
-		// _gen("CNJMP " + GET_VALUE(second, 0) + " " + labelEnd);
 		p->push_back("CNJMP " + GET_VALUE(second, 0) + " " + labelEnd);
 		p->push_right(second);
 		TRY_MATCH_TOKEN_TYPE(_lexer, token, Semicolon);
-		// third = _parseLV();
-		// fourth = _parseSLV(GET_VALUE(third, 0));
 		third = _parseFE();
 		p->push_right(third);
-		// p->push_right(fourth);
 		TRY_MATCH_TOKEN_TYPE_VALUE(_lexer, token, Bracket, ")");
 		TRY_MATCH_TOKEN_TYPE_VALUE(_lexer, token, Bracket, "{");
-		// _gen(labelFor + ":");
 		p->push_back(labelFor + ":");
 		fourth = _parseS();
 		while (fourth)
@@ -514,11 +539,7 @@ AstNode* Parser::_parseS(bool canGen)
 			p->push_right(fourth);
 			fourth = _parseS();
 		}
-		// _gen(fourth);
-		// _gen(third);
-		// _gen("JMP " + labelBool);
 		p->push_back("JMP " + labelBool);
-		// _gen(labelEnd + ":");
 		p->push_back(labelEnd + ":");
 		TRY_MATCH_TOKEN_TYPE_VALUE(_lexer, token, Bracket, "}");
 		_loopEndLabel.pop();
@@ -566,7 +587,6 @@ AstNode* Parser::_parseSIF()
 			p->push_right(first);
 			first = _parseS();
 		}
-		// _gen(first);
 		TRY_MATCH_TOKEN_TYPE_VALUE(_lexer, token, Bracket, "}");
 		envir.backPreviouEnvironment();
 		p->order = AstNode::notGen;
@@ -593,11 +613,9 @@ AstNode* Parser::_parseSLV(const string& id)
 		token = _lexer.nextToken();
 		first = _parse_SLV();
 		p->push_right(first);
-		// p->push_back("");
 		expr = id + " = " + GET_VALUE(first, 0);
 		p->push_back(expr);
 		p->order = AstNode::right;
-		// _gen(expr);
 		return p;
 	}
 	else if (CHECK_TYPE_VALUE(token, Bracket, "("))
@@ -605,11 +623,9 @@ AstNode* Parser::_parseSLV(const string& id)
 		token = _lexer.nextToken();
 		first = _parseCL();
 		p->push_right(first);
-		// p->push_back("");
 		expr = id + "(" + GET_VALUE(first, 0) + ")";
 		p->push_back(expr);
 		p->order = AstNode::right;
-		// _gen(expr);
 		TRY_MATCH_TOKEN_TYPE_VALUE(_lexer, token, Bracket, ")");
 		return p;
 	}
@@ -694,11 +710,10 @@ AstNode* Parser::_parse_VD(Type* type, const string& id)
 		token = _lexer.nextToken();
 		first = _parseRV();
 		p->push_right(first);
-		// _gen(id + " = " + GET_VALUE(first, 0));
 		p->push_back(id + " = " + GET_VALUE(first, 0));
 		second = _parse_VD(type, "");
 		p->push_right(second);
-		p->order = AstNode::_vd;
+		p->order = AstNode::sVd;
 		return p;
 	}
 	else if (CHECK_TYPE(token, Comma))
@@ -1137,7 +1152,6 @@ AstNode* Parser::_parse_BE(const string& number)
 		first = _parseBF();
 		p->push_right(first);
 		expr = var + " = " + number + " " + token->lexeme + " " + GET_VALUE(first, 0);
-		// _gen(expr);
 		second = _parse_BE(var);
 		p->order = AstNode::eMid;
 
@@ -1248,7 +1262,6 @@ AstNode* Parser::_parse_E(const string& number)
 		first = _parseT();
 		p->push_right(first);
 		expr = var + " = " + number + " " + token->lexeme + " " + GET_VALUE(first, 0);
-		// _gen(expr);
 		second = _parse_E(var);
 		p->order = AstNode::eMid;
 
@@ -1344,7 +1357,6 @@ AstNode* Parser::_parse_T(const string& number)
 		first = _parseF();
 		p->push_right(first);
 		expr = var + " = " + number + " " + token->lexeme + " " + GET_VALUE(first, 0);
-		// _gen(expr);
 		second = _parse_T(var);
 		p->order = AstNode::eMid;
 
@@ -1448,7 +1460,6 @@ AstNode* Parser::_parse_F(const string& id)
 		TRY_MATCH_TOKEN_TYPE_VALUE(_lexer, token, Bracket, ")");
 		var = g_getVar();
 		expr = var + " = " + id + "(" + GET_VALUE(first, 0) + ")";
-		// _gen(expr);
 		p->order = AstNode::eRight;
 		p->push_back(var);
 		p->push_back(expr);
@@ -1552,6 +1563,7 @@ AstNode* Parser::_parse_CL()
 
 Parser::Parser(Lexer& lexer)
 	:_lexer(lexer)
-{
+{	
+	// ∆Ù∂Ø”Ô∑®∑÷Œˆ
 	_ast.root = _parsePR();
 }

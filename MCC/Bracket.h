@@ -1,4 +1,10 @@
-#pragma once
+#ifndef _BRACKET_H_
+#define _BRACKET_H_ 0
+
+/*
+	这个Token表示三类括号 '{' '}' '(' ')' '[' ']'
+*/
+
 #include "Token.h"
 class Bracket :
 	public Token
@@ -12,7 +18,7 @@ public:
 };
 
 
-namespace std{
+namespace std {
 	template<>
 	struct hash<Bracket>
 	{
@@ -49,3 +55,5 @@ namespace std{
 		}
 	};
 }
+
+#endif // !_BRACKET_H_

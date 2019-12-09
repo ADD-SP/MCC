@@ -102,8 +102,11 @@
     <ClInclude Include="LLTable.h">
       <Filter>头文件\Unused</Filter>
     </ClInclude>
-    <ClInclude Include="Comma.h">
+    <ClInclude Include="FourTuple.h">
       <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Comma.h">
+      <Filter>头文件\Tokens</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -181,6 +184,9 @@
     </ClCompile>
     <ClCompile Include="Comma.cpp">
       <Filter>源文件\Tokens</Filter>
+    </ClCompile>
+    <ClCompile Include="FourTuple.cpp">
+      <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

@@ -1,6 +1,10 @@
 #ifndef _DECIMAL_H_
 #define _DECIMAL_H_ 0
 
+/*
+	这个Token表示浮点数
+*/
+
 #include "Number.h"
 class Decimal :
 	public Number

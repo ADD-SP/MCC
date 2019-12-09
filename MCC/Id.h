@@ -1,6 +1,10 @@
 #ifndef _ID_H_
 #define _ID_H_ 0
 
+/*
+	这个Token表示表示标识符
+*/
+
 
 #include "Token.h"
 class Id :

@@ -1,6 +1,10 @@
 #ifndef _SEMICOLON_H_
 #define _SEMICOLON_H_ 0
 
+/*
+	这个Token表示分号';'
+*/
+
 #include "Token.h"
 class Semicolon :
 	public Token

@@ -1,6 +1,10 @@
 #ifndef _END_TOKEN_H_
 #define _END_TOKEN_H_ 0
 
+/*
+	这个Token表示源代码结束
+*/
+
 #include "Token.h"
 class EndToken :
 	public Token

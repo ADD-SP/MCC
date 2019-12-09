@@ -10,7 +10,7 @@ const size_t AstNode::sIf = 6;
 const size_t AstNode::sElse = 7;
 const size_t AstNode::sWhile = 8;
 const size_t AstNode::sFor = 9;
-const size_t AstNode::_vd = 10;
+const size_t AstNode::sVd = 10;
 const size_t AstNode::notGen = 11;
 
 
@@ -23,13 +23,16 @@ AstNode::AstNode(size_t counts, ...)
 	:order(eLeft)
 {
 	va_list args;
+	// 准备获取可变参数
 	va_start(args, counts);
 
 	for (int i = 0; i < counts; i++)
 	{
+		// 插入所有可变参数（value）
 		_values.push_back(va_arg(args, string));
 	}
 
+	// 结束可变参数的只用
 	va_end(args);
 }
 

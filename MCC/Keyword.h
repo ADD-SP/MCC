@@ -1,6 +1,10 @@
 #ifndef _KEY_WORD_H_
 #define _KEY_WORD_H_ 0
 
+/*
+	这个Token表示关键字
+*/
+
 #include "Token.h"
 class Keyword :
 	public Token

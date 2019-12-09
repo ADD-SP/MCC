@@ -1,6 +1,10 @@
 #ifndef _AST_H_
 #define _AST_H_ 0
 
+/*
+	³éÏóÓï·¨Ê÷
+*/
+
 #include "AstNode.h"
 
 class Ast

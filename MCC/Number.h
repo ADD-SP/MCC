@@ -1,7 +1,12 @@
 #ifndef _NUMBER_H_
 #define _NUMBER_H_ 0
-#include "Token.h"
 
+
+/*
+	这个Token表示数字，包括整数和浮点数。
+*/
+
+#include "Token.h"
 #include <string>
 
 using std::string;
